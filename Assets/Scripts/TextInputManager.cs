@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using MoreMountains.Feedbacks;
 
 public class TextInputManager : MonoBehaviour
 {
@@ -14,7 +15,15 @@ public class TextInputManager : MonoBehaviour
 	public AudioSource aS;
 	public int randomus;
 	public List <AudioClip> aC;
+	public int writeCount;
+	public TextMeshProUGUI countText;
 	
+	public MMFeedbacks feedBack;
+	
+	void Start()
+	{
+		countText.text = writeCount.ToString();
+	}	
 	
 	void OnMouseOver()
 	{
@@ -26,6 +35,8 @@ public class TextInputManager : MonoBehaviour
 	
 	public void DisableHighlight()
 	{
+		aS.clip = aC[6];
+		aS.Play();
 		isWriting = true;
 		select.SetActive(false);
 	}
@@ -44,19 +55,40 @@ public class TextInputManager : MonoBehaviour
 	{
 		theText = inputField.text;
 		
-		if(theText == "Islamoboucled")
+		if(theText == "DisgaeaHorny")
 		{
 			textMesh.color = Color.blue;
-			Debug.Log("ça marche");
 			aS.clip = aC[5];
 			aS.Play();
-			inputField.interactable = false;
-			isWriting = true;
+			feedBack?.PlayFeedbacks();
+		}
+		
+		if(theText == "lighter")
+		{
+			textMesh.color = Color.red;
+			aS.clip = aC[5];
+			aS.Play();
+			feedBack?.PlayFeedbacks();
+		}
+		
+		inputField.interactable = false;
+		isWriting = true;
+		//writeCount -= theText.Length;
+		//countText.text = writeCount.ToString();
+		
+		if(theText.Length == 0)
+		{
+			inputField.interactable = true;
+			isWriting = false;
 		}
 	}
 	
 	public void ScribbleSound()
 	{
+		theText = inputField.text;
+		writeCount --;
+		countText.text = writeCount.ToString();
+		
 		randomus = Random.Range(1,6);
 		if(randomus == 1)
 		{
