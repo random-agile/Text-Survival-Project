@@ -17,6 +17,9 @@ public class TextInputManager : MonoBehaviour
 	public List <AudioClip> aC;
 	public int writeCount;
 	public TextMeshProUGUI countText;
+	public bool isFinished;
+	public string lastWord;
+	public bool isFirst;
 	
 	public MMFeedbacks feedBack;
 	
@@ -27,10 +30,14 @@ public class TextInputManager : MonoBehaviour
 	
 	void OnMouseOver()
 	{
-		if(!isWriting)
+		if(isFinished)
+		{
+			select.SetActive(false);
+		}
+		else if(!isWriting)
 		{
 			select.SetActive(true);
-		}		
+		}				
 	}
 	
 	public void DisableHighlight()
@@ -54,8 +61,11 @@ public class TextInputManager : MonoBehaviour
 	public void CheckTextInput()
 	{
 		theText = inputField.text;
+		inputField.interactable = false;
+		isWriting = true;
+		isFinished = true;
 		
-		if(theText == "DisgaeaHorny")
+		if(theText == "Disgaea Horny")
 		{
 			textMesh.color = Color.blue;
 			aS.clip = aC[5];
@@ -71,50 +81,76 @@ public class TextInputManager : MonoBehaviour
 			feedBack?.PlayFeedbacks();
 		}
 		
-		inputField.interactable = false;
-		isWriting = true;
-		//writeCount -= theText.Length;
-		//countText.text = writeCount.ToString();
-		
 		if(theText.Length == 0)
 		{
 			inputField.interactable = true;
 			isWriting = false;
+			isFinished = false;
 		}
 	}
 	
 	public void ScribbleSound()
 	{
 		theText = inputField.text;
-		writeCount --;
+		isFirst = false;
+		if(theText.Length > 0)
+		{
+			lastWord = theText.Substring(theText.Length - 1);
+		}
+		if(lastWord == " ")
+		{
+			isFirst = true;
+		}
+		else
+		{
+			writeCount --;
+		}
+		
 		countText.text = writeCount.ToString();
 		
 		randomus = Random.Range(1,6);
-		if(randomus == 1)
+		
+		if(randomus == 1 && !isFirst)
 		{
 			aS.clip = aC[0];
 			aS.Play();
 		}
-		else if(randomus == 2)
+		else if(randomus == 2 && !isFirst)
 		{
 			aS.clip = aC[1];
 			aS.Play();
 		}
-		else if(randomus == 3)
+		else if(randomus == 3 && !isFirst)
 		{
 			aS.clip = aC[2];
 			aS.Play();
 		}
-		else if(randomus == 4)
+		else if(randomus == 4 && !isFirst)
 		{
 			aS.clip = aC[3];
 			aS.Play();
 		}
-		else if(randomus == 5)
+		else if(randomus == 5 && !isFirst)
 		{
 			aS.clip = aC[4];
 			aS.Play();
-		}	
+		}
+	}
+ 
+	void DisableKey( KeyCode key )
+	{
+		if( Event.current.keyCode == key)
+		{
+			if( Event.current.type == EventType.KeyUp || Event.current.type == EventType.KeyDown )
+			{
+				Event.current.Use();
+			}
+		}
+	}
+ 
+	void OnGUI()
+	{
+		DisableKey( KeyCode.Backspace );
 	}
 	
 }
