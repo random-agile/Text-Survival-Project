@@ -21,7 +21,8 @@ public class TextInputManager : MonoBehaviour
 	public string lastWord;
 	public bool isFirst;
 	
-	public MMFeedbacks feedBack;
+	public MMFeedbacks checkFeed;
+	public MMFeedbacks countFeed;
 	
 	void Start()
 	{
@@ -70,7 +71,7 @@ public class TextInputManager : MonoBehaviour
 			textMesh.color = Color.blue;
 			aS.clip = aC[5];
 			aS.Play();
-			feedBack?.PlayFeedbacks();
+			checkFeed.PlayFeedbacks();
 		}
 		
 		if(theText == "lighter")
@@ -78,7 +79,7 @@ public class TextInputManager : MonoBehaviour
 			textMesh.color = Color.red;
 			aS.clip = aC[5];
 			aS.Play();
-			feedBack?.PlayFeedbacks();
+			checkFeed.PlayFeedbacks();
 		}
 		
 		if(theText.Length == 0)
@@ -104,6 +105,7 @@ public class TextInputManager : MonoBehaviour
 		else
 		{
 			writeCount --;
+			countFeed.PlayFeedbacks();
 		}
 		
 		countText.text = writeCount.ToString();
