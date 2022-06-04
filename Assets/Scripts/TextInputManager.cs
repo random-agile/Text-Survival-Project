@@ -29,6 +29,12 @@ public class TextInputManager : MonoBehaviour
 		countText.text = writeCount.ToString();
 	}	
 	
+	void OnMouseEnter()
+	{
+		aS.clip = aC[7];
+		aS.Play();
+	}
+	
 	void OnMouseOver()
 	{
 		if(isFinished)
