@@ -7,6 +7,7 @@ using MoreMountains.Feedbacks;
 
 public class TextInputManager : MonoBehaviour
 {
+	public MouseEraser ME;
 	public TMP_InputField inputField;
 	public string theText;
 	public GameObject select;
@@ -20,6 +21,7 @@ public class TextInputManager : MonoBehaviour
 	public bool isFinished;
 	public string lastWord;
 	public bool isFirst;
+	public GameObject eraseButton;
 	
 	public MMFeedbacks checkFeed;
 	public MMFeedbacks countFeed;
@@ -31,8 +33,11 @@ public class TextInputManager : MonoBehaviour
 	
 	void OnMouseEnter()
 	{
+		if(!isWriting)
+		{
 		aS.clip = aC[7];
-		aS.Play();
+			aS.Play();
+		}
 	}
 	
 	void OnMouseOver()
@@ -71,6 +76,7 @@ public class TextInputManager : MonoBehaviour
 		inputField.interactable = false;
 		isWriting = true;
 		isFinished = true;
+		eraseButton.SetActive(true);
 		
 		if(theText == "Disgaea Horny")
 		{
@@ -93,6 +99,7 @@ public class TextInputManager : MonoBehaviour
 			inputField.interactable = true;
 			isWriting = false;
 			isFinished = false;
+			eraseButton.SetActive(false);
 		}
 	}
 	
@@ -110,8 +117,15 @@ public class TextInputManager : MonoBehaviour
 		}
 		else
 		{
-			writeCount --;
-			countFeed.PlayFeedbacks();
+			if(ME.countLock)
+			{
+				ME.countLock = false;
+			}
+			else
+			{
+				writeCount --;
+				countFeed.PlayFeedbacks();
+			}
 		}
 		
 		countText.text = writeCount.ToString();
