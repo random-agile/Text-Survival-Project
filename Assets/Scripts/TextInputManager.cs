@@ -22,21 +22,39 @@ public class TextInputManager : MonoBehaviour
 	public string lastWord;
 	public bool isFirst;
 	public GameObject eraseButton;
+	bool isZero;
+	public List<Texture2D> cursorTexture;
 	
 	public MMFeedbacks checkFeed;
 	public MMFeedbacks countFeed;
 	
 	void Start()
 	{
+		Cursor.SetCursor(cursorTexture[0], Vector2.zero, CursorMode.Auto);
 		countText.text = writeCount.ToString();
 	}	
 	
+	void Update()
+	{
+		if(isZero)
+		{
+			theText = inputField.text.Remove(inputField.text.Length -1);
+			inputField.text = theText;
+			isZero = false;
+		}
+	}
+	
 	void OnMouseEnter()
 	{
-		if(!isWriting)
+		if(!isWriting && !isFinished)
 		{
 		aS.clip = aC[7];
 			aS.Play();
+		}
+		
+		if(!isFinished)
+		{
+			Cursor.SetCursor(cursorTexture[2], Vector2.zero, CursorMode.Auto);
 		}
 	}
 	
@@ -68,6 +86,7 @@ public class TextInputManager : MonoBehaviour
 	void OnMouseExit()
 	{
 		select.SetActive(false);
+		Cursor.SetCursor(cursorTexture[0], Vector2.zero, CursorMode.Auto);
 	}
     
 	public void CheckTextInput()
@@ -107,10 +126,17 @@ public class TextInputManager : MonoBehaviour
 	{
 		theText = inputField.text;
 		isFirst = false;
+		
+		if(writeCount == 0)
+		{
+			isZero = true;
+		}
+		
 		if(theText.Length > 0)
 		{
 			lastWord = theText.Substring(theText.Length - 1);
 		}
+		
 		if(lastWord == " ")
 		{
 			isFirst = true;
@@ -121,8 +147,9 @@ public class TextInputManager : MonoBehaviour
 			{
 				ME.countLock = false;
 			}
-			else
+			else if(writeCount > 0)
 			{
+				playSound();
 				writeCount --;
 				countFeed.PlayFeedbacks();
 			}
@@ -130,33 +157,6 @@ public class TextInputManager : MonoBehaviour
 		
 		countText.text = writeCount.ToString();
 		
-		randomus = Random.Range(1,6);
-		
-		if(randomus == 1 && !isFirst)
-		{
-			aS.clip = aC[0];
-			aS.Play();
-		}
-		else if(randomus == 2 && !isFirst)
-		{
-			aS.clip = aC[1];
-			aS.Play();
-		}
-		else if(randomus == 3 && !isFirst)
-		{
-			aS.clip = aC[2];
-			aS.Play();
-		}
-		else if(randomus == 4 && !isFirst)
-		{
-			aS.clip = aC[3];
-			aS.Play();
-		}
-		else if(randomus == 5 && !isFirst)
-		{
-			aS.clip = aC[4];
-			aS.Play();
-		}
 	}
  
 	void DisableKey( KeyCode key )
@@ -173,6 +173,37 @@ public class TextInputManager : MonoBehaviour
 	void OnGUI()
 	{
 		DisableKey( KeyCode.Backspace );
+	}
+	
+	void playSound()
+	{
+		randomus = Random.Range(1,6);
+		
+		if(randomus == 1 && !isFirst && writeCount > 0)
+		{
+			aS.clip = aC[0];
+			aS.Play();
+		}
+		else if(randomus == 2 && !isFirst && writeCount > 0)
+		{
+			aS.clip = aC[1];
+			aS.Play();
+		}
+		else if(randomus == 3 && !isFirst && writeCount > 0)
+		{
+			aS.clip = aC[2];
+			aS.Play();
+		}
+		else if(randomus == 4 && !isFirst && writeCount > 0)
+		{
+			aS.clip = aC[3];
+			aS.Play();
+		}
+		else if(randomus == 5 && !isFirst && writeCount > 0)
+		{
+			aS.clip = aC[4];
+			aS.Play();
+		}
 	}
 	
 }

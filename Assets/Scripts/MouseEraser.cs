@@ -26,7 +26,7 @@ public class MouseEraser : MonoBehaviour
 	public void GetEraser()
 	{
 		
-		if(!isGommed)
+		if(!isGommed && eraseCount > 0)
 		{
 			aS.clip = aC;
 			aS.Play();
@@ -44,7 +44,7 @@ public class MouseEraser : MonoBehaviour
 	
 	public void EraseText()
 	{
-		if(TIM.isFinished)
+		if(TIM.isFinished && eraseCount > 0)
 		{
 			eraseCount--;
 			countText.text = eraseCount.ToString();
