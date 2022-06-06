@@ -7,7 +7,7 @@ public class MouseEraser : MonoBehaviour
 {
 	public Texture2D gommeTex;
 	public Texture2D mainTex;
-	private bool isGommed;
+	public bool isGommed;
 	public TextInputManager TIM;
 	public TextMeshProUGUI countText;
 	public TMP_InputField inputField;
@@ -18,8 +18,15 @@ public class MouseEraser : MonoBehaviour
 	public AudioClip aD;
 	public bool countLock;
 	
+	int xspot;
+	int yspot;
+	Vector2 hotSpot;
+	
 	void Start()
 	{
+		int xspot = gommeTex.width/2;
+		int yspot = gommeTex.height/2;
+		Vector2 hotSpot = new Vector2(xspot,yspot);
 		countText.text = eraseCount.ToString();
 	}
 	
@@ -30,13 +37,13 @@ public class MouseEraser : MonoBehaviour
 		{
 			aS.clip = aC;
 			aS.Play();
-			Cursor.SetCursor(gommeTex, Vector2.zero, CursorMode.Auto);
+			Cursor.SetCursor(gommeTex, hotSpot, CursorMode.Auto);
 			isGommed = true;
 			countLock = true;
 		}
 		else if(isGommed)
 		{
-			Cursor.SetCursor(mainTex, Vector2.zero, CursorMode.Auto);
+			Cursor.SetCursor(mainTex, hotSpot, CursorMode.Auto);
 			isGommed = false;
 			countLock = false;
 		}
@@ -44,7 +51,7 @@ public class MouseEraser : MonoBehaviour
 	
 	public void EraseText()
 	{
-		if(TIM.isFinished && eraseCount > 0)
+		if(TIM.isFinished && eraseCount > 0 && isGommed)
 		{
 			eraseCount--;
 			countText.text = eraseCount.ToString();
@@ -53,10 +60,11 @@ public class MouseEraser : MonoBehaviour
 			inputField.interactable = true;
 			TIM.isWriting = false;
 			TIM.isFinished = false;
-			Cursor.SetCursor(mainTex, Vector2.zero, CursorMode.Auto);
+			Cursor.SetCursor(mainTex, hotSpot, CursorMode.Auto);
 			isGommed = false;
 			eraseButton.SetActive(false);
 			aS.clip = aD;
+			TIM.textMesh.color = Color.black;
 			aS.Play();
 		}
 	}

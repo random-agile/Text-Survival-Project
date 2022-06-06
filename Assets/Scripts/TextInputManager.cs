@@ -28,9 +28,16 @@ public class TextInputManager : MonoBehaviour
 	public MMFeedbacks checkFeed;
 	public MMFeedbacks countFeed;
 	
+	int xspot;
+	int yspot;
+	Vector2 hotSpot;
+	
 	void Start()
 	{
-		Cursor.SetCursor(cursorTexture[0], Vector2.zero, CursorMode.Auto);
+		int xspot = cursorTexture[0].width/2;
+		int yspot = cursorTexture[0].height/2;
+		Vector2 hotSpot = new Vector2(xspot,yspot);
+		Cursor.SetCursor(cursorTexture[0], hotSpot, CursorMode.Auto);
 		countText.text = writeCount.ToString();
 	}	
 	
@@ -54,7 +61,8 @@ public class TextInputManager : MonoBehaviour
 		
 		if(!isFinished)
 		{
-			Cursor.SetCursor(cursorTexture[2], Vector2.zero, CursorMode.Auto);
+			Cursor.SetCursor(cursorTexture[2], hotSpot, CursorMode.Auto);
+			ME.isGommed = false;
 		}
 	}
 	
@@ -86,7 +94,10 @@ public class TextInputManager : MonoBehaviour
 	void OnMouseExit()
 	{
 		select.SetActive(false);
-		Cursor.SetCursor(cursorTexture[0], Vector2.zero, CursorMode.Auto);
+		if(!ME.isGommed)
+		{
+			Cursor.SetCursor(cursorTexture[0], hotSpot, CursorMode.Auto);
+		}
 	}
     
 	public void CheckTextInput()
