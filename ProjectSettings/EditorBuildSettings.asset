@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Experimental Chaos.unity
     guid: dd96fd75ba8954741a73c5009783d835
   - enabled: 0
     path: Assets/Scenes/ScreenTitle.unity
     guid: 81fb9d252d9820646b48c9fb59eb575e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: 396a036cc0bc55d4282ef40b0200948b
   m_configObjects: {}

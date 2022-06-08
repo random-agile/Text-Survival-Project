@@ -16,7 +16,6 @@ public class MinerManager : MonoBehaviour
 	private Transform pos;
 	public Animator anims;
 	
-	public KeyCode a = KeyCode.A;
 	
 	void Start()
 	{
@@ -31,7 +30,6 @@ public class MinerManager : MonoBehaviour
 		if(wait == 20){ChangingState(); wait = 0;}
 		transform.LookAt(2 * transform.position - pos.position);
 		
-		if(Input.GetKeyUp(a)) state++;
 	}
 	
 	void ChangingState()

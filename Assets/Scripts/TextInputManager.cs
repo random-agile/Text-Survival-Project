@@ -24,6 +24,7 @@ public class TextInputManager : MonoBehaviour
 	public GameObject eraseButton;
 	bool isZero;
 	public List<Texture2D> cursorTexture;
+	public BoxCollider2D boxCol;
 	
 	public MMFeedbacks checkFeed;
 	public MMFeedbacks countFeed;
@@ -31,6 +32,15 @@ public class TextInputManager : MonoBehaviour
 	int xspot;
 	int yspot;
 	Vector2 hotSpot;
+	
+	bool menuOpen;
+	int bookWords;
+	public List<TextMeshProUGUI> bookTexts;
+	public List<string> foundWords;
+	private KeyCode a = KeyCode.Space;
+	
+	public GameObject book;
+	
 	
 	void Start()
 	{
@@ -48,6 +58,24 @@ public class TextInputManager : MonoBehaviour
 			theText = inputField.text.Remove(inputField.text.Length -1);
 			inputField.text = theText;
 			isZero = false;
+		}
+		
+		if(Input.GetKeyUp(a))
+		{
+			if(!menuOpen && !isWriting)
+			{
+				OpenBook();
+				aS.clip = aC[8];
+				aS.Play();
+				menuOpen = true;
+			}
+			else if(menuOpen)
+			{
+				CloseBook();
+				menuOpen = false;
+				aS.clip = aC[8];
+				aS.Play();
+			}
 		}
 	}
 	
@@ -104,7 +132,7 @@ public class TextInputManager : MonoBehaviour
 	{
 		theText = inputField.text;
 		inputField.interactable = false;
-		isWriting = true;
+		isWriting = false;
 		isFinished = true;
 		eraseButton.SetActive(true);
 		
@@ -114,6 +142,8 @@ public class TextInputManager : MonoBehaviour
 			aS.clip = aC[5];
 			aS.Play();
 			checkFeed.PlayFeedbacks();
+			AddWord();
+			
 		}
 		
 		if(theText == "lighter")
@@ -122,6 +152,7 @@ public class TextInputManager : MonoBehaviour
 			aS.clip = aC[5];
 			aS.Play();
 			checkFeed.PlayFeedbacks();
+			AddWord();
 		}
 		
 		if(theText.Length == 0)
@@ -215,6 +246,45 @@ public class TextInputManager : MonoBehaviour
 			aS.clip = aC[4];
 			aS.Play();
 		}
+	}
+	
+	void OpenBook()
+	{
+		book.SetActive(true);
+		boxCol.enabled = false;
+	}
+	
+	void CloseBook()
+	{
+		book.SetActive(false);
+		boxCol.enabled = true;
+		
+	}
+	
+	public void ButtonBook()
+	{
+			if(!menuOpen && !isWriting)
+			{
+				OpenBook();
+				aS.clip = aC[8];
+				aS.Play();
+				menuOpen = true;
+			}
+			else if(menuOpen)
+			{
+				CloseBook();
+				menuOpen = false;
+				aS.clip = aC[8];
+				aS.Play();
+			}
+	}
+	
+	void AddWord()
+	{
+		bookTexts[bookWords].text = theText;
+		bookTexts[bookWords].color = textMesh.color;
+		bookWords++;
+		foundWords.Add(theText);
 	}
 	
 }
