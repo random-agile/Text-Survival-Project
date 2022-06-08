@@ -41,6 +41,10 @@ public class TextInputManager : MonoBehaviour
 	
 	public GameObject book;
 	
+	void Awake()
+	{
+		DontDestroyOnLoad(this.gameObject);
+	}	
 	
 	void Start()
 	{
