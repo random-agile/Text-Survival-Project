@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1600564, g: 0.1897691, b: 0.22250909, a: 1}
+  m_IndirectSpecularColor: {r: 0.1600557, g: 0.1897683, b: 0.22250816, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -602,9 +602,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba1c8e21665b4b4a9f902535776f168, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSrc: {fileID: 0}
+  turningPage: {fileID: 0}
   itemBox: {fileID: 645962181}
   endBox: {fileID: 1569683901}
   enter: 13
+  originalText: 
   uiText: {fileID: 497447080}
 --- !u!82 &497447083
 AudioSource:
@@ -1656,6 +1659,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogBox
       objectReference: {fileID: 0}
+    - target: {fileID: 7499528061648442313, guid: bab2bd083b41e964baf0efd5bbb425b2, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 116de37285fe84345911c0e5d23570b8, type: 2}
+    - target: {fileID: 7499528061648442313, guid: bab2bd083b41e964baf0efd5bbb425b2, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -6358927913087781916, guid: 116de37285fe84345911c0e5d23570b8, type: 2}
     - target: {fileID: 7499528061648442314, guid: bab2bd083b41e964baf0efd5bbb425b2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -321.5

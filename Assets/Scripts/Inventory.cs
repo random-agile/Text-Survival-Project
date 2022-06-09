@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Inventory : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class Inventory : MonoBehaviour
 	
 	TextInputManager TIM;
 	PlayerStats PS;
+	
+	public GameObject fade;
 	
 	public List <TextMeshProUGUI> statsText;
 	
@@ -80,6 +83,18 @@ public class Inventory : MonoBehaviour
 	void CloseBag()
 	{
 		bag.SetActive(false);		
+	}
+	
+	public void PrepLoad()
+	{
+		fade.SetActive(true);
+		StartCoroutine(Load());
+	}
+	
+	IEnumerator Load()
+	{
+		yield return new WaitForSeconds(1f);
+		SceneManager.LoadScene("Assets/Scenes/Test.unity");
 	}
 }
 

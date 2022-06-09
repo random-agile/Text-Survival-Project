@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerController))]
 public class PlayerInput : MonoBehaviour
@@ -33,5 +34,10 @@ public class PlayerInput : MonoBehaviour
 	public void DisableScript()
 	{
 		enabled = false;
+	}
+	
+	public void Loadings()
+	{
+		SceneManager.LoadScene("Assets/Scenes/Experimental Chaos.unity");
 	}
 }
