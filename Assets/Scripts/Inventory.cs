@@ -5,8 +5,8 @@ using TMPro;
 
 public class Inventory : MonoBehaviour
 {
-	private KeyCode b = KeyCode.Escape;
-	bool bagOpen;
+	private KeyCode b = KeyCode.LeftAlt;
+	public bool bagOpen;
 	public AudioSource aS;
 	public List<AudioClip> aC;
 	public GameObject bag;
@@ -20,26 +20,21 @@ public class Inventory : MonoBehaviour
 	{
 		TIM = this.gameObject.GetComponent<TextInputManager>();
 		PS = this.gameObject.GetComponent<PlayerStats>();
-		
-		statsText[0].text = "Health  " + PS.hp.ToString();
-		statsText[1].text = "Stress   " + PS.stress.ToString();
-		statsText[2].text = "Will             " + PS.will.ToString();
-		statsText[3].text = "Conviction  " + PS.conviction.ToString();
-		statsText[4].text = "Dexterity    " + PS.dexterity.ToString();
+		SetStats();
 	}
 	
 	void Update()
 	{
 		if(Input.GetKeyUp(b))
 		{
-			if(!bagOpen && !TIM.isWriting)
+			if(!bagOpen && !TIM.isWriting && !TIM.menuOpen)
 			{
 				OpenBag();
 				//aS.clip = aC[0];
 				//aS.Play();
 				bagOpen = true;
 			}
-			else if(bagOpen && !TIM.isWriting)
+			else if(bagOpen && !TIM.isWriting && !TIM.menuOpen)
 			{
 				CloseBag();
 				bagOpen = false;
@@ -51,20 +46,29 @@ public class Inventory : MonoBehaviour
 	
 	public void ButtonOpenBag()
 	{
-		if(!bagOpen && !TIM.isWriting)
+		if(!bagOpen && !TIM.isWriting && !TIM.menuOpen)
 			{
 				OpenBag();
 				//aS.clip = aC[0];
 				//aS.Play();
 				bagOpen = true;
 			}
-		else if(bagOpen && !TIM.isWriting)
+		else if(bagOpen && !TIM.isWriting && !TIM.menuOpen)
 			{
 				CloseBag();
 				bagOpen = false;
 				//aS.clip = aC[0];
 				//aS.Play();
 			}	
+	}
+	
+	void SetStats()
+	{
+		statsText[0].text = "Health  " + PS.hp.ToString();
+		statsText[1].text = "Stress   " + PS.stress.ToString();
+		statsText[2].text = "Will             " + PS.will.ToString();
+		statsText[3].text = "Conviction  " + PS.conviction.ToString();
+		statsText[4].text = "Dexterity    " + PS.dexterity.ToString();
 	}
 	
 	

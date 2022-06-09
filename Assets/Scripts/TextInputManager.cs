@@ -7,6 +7,7 @@ using MoreMountains.Feedbacks;
 
 public class TextInputManager : MonoBehaviour
 {
+	Inventory I;
 	public MouseEraser ME;
 	public TMP_InputField inputField;
 	public string theText;
@@ -33,7 +34,7 @@ public class TextInputManager : MonoBehaviour
 	int yspot;
 	Vector2 hotSpot;
 	
-	bool menuOpen;
+	public bool menuOpen;
 	int bookWords;
 	public List<TextMeshProUGUI> bookTexts;
 	public List<string> foundWords;
@@ -42,6 +43,8 @@ public class TextInputManager : MonoBehaviour
 	public GameObject book;
 	public TextMeshProUGUI countTextWord;
 	
+	public Button endButton;
+	
 	void Awake()
 	{
 		DontDestroyOnLoad(this.gameObject);
@@ -49,6 +52,7 @@ public class TextInputManager : MonoBehaviour
 	
 	void Start()
 	{
+		I = this.gameObject.GetComponent<Inventory>();
 		int xspot = cursorTexture[0].width/2;
 		int yspot = cursorTexture[0].height/2;
 		Vector2 hotSpot = new Vector2(xspot,yspot);
@@ -67,18 +71,18 @@ public class TextInputManager : MonoBehaviour
 		
 		if(Input.GetKeyUp(a))
 		{
-			if(!menuOpen && !isWriting)
+			if(!menuOpen && !isWriting && !I.bagOpen)
 			{
 				OpenBook();
 				aS.clip = aC[8];
 				aS.Play();
 				menuOpen = true;
 			}
-			else if(menuOpen)
+			else if(menuOpen && !I.bagOpen)
 			{
 				CloseBook();
 				menuOpen = false;
-				aS.clip = aC[8];
+				aS.clip = aC[9];
 				aS.Play();
 			}
 		}
@@ -141,7 +145,7 @@ public class TextInputManager : MonoBehaviour
 		isFinished = true;
 		eraseButton.SetActive(true);
 		
-		if(theText == "Disgaea Horny")
+		if(theText == "Disgaea Horny" && !foundWords.Contains("Disgaea Horny"))
 		{
 			textMesh.color = Color.blue;
 			aS.clip = aC[5];
@@ -151,7 +155,7 @@ public class TextInputManager : MonoBehaviour
 			
 		}
 		
-		if(theText == "lighter")
+		if(theText == "lighter" && !foundWords.Contains("lighter"))
 		{
 			textMesh.color = Color.red;
 			aS.clip = aC[5];
@@ -167,6 +171,8 @@ public class TextInputManager : MonoBehaviour
 			isFinished = false;
 			eraseButton.SetActive(false);
 		}
+		
+		endButton.Select();
 	}
 	
 	public void ScribbleSound()
@@ -268,18 +274,18 @@ public class TextInputManager : MonoBehaviour
 	
 	public void ButtonBook()
 	{
-			if(!menuOpen && !isWriting)
+		if(!menuOpen && !isWriting && !I.bagOpen)
 			{
 				OpenBook();
 				aS.clip = aC[8];
 				aS.Play();
 				menuOpen = true;
 			}
-			else if(menuOpen)
+		else if(menuOpen && !I.bagOpen)
 			{
 				CloseBook();
 				menuOpen = false;
-				aS.clip = aC[8];
+			aS.clip = aC[9];
 				aS.Play();
 			}
 	}
