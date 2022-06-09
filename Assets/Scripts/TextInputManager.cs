@@ -40,6 +40,7 @@ public class TextInputManager : MonoBehaviour
 	private KeyCode a = KeyCode.Space;
 	
 	public GameObject book;
+	public TextMeshProUGUI countTextWord;
 	
 	void Awake()
 	{
@@ -288,6 +289,7 @@ public class TextInputManager : MonoBehaviour
 		bookTexts[bookWords].text = theText;
 		bookTexts[bookWords].color = textMesh.color;
 		bookWords++;
+		countTextWord.text = bookWords.ToString();
 		foundWords.Add(theText);
 	}
 	

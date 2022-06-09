@@ -9,18 +9,8 @@ public class PlayerStats : MonoBehaviour
 	public int stress = 0;
 	public int stressMax = 100;
 	public int thirst = 0;
-	public int guts = 1;
+	public int will = 1;
 	public int conviction = 1;
 	public int dexterity = 1;
-	
-	void Awake()
-	{
-		DontDestroyOnLoad(this.gameObject);
-	}
-	
-	void Start()
-	{
-		
-	}
 }
 
