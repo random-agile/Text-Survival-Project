@@ -11,6 +11,8 @@ public class PlayerInput : MonoBehaviour
 	public KeyCode turnLeft = KeyCode.LeftArrow;
 	public KeyCode turnRight = KeyCode.RightArrow;
 	
+	public GameObject fadeOut;
+	
 	PlayerController controller;
 	
 	private void Awake()
@@ -36,8 +38,15 @@ public class PlayerInput : MonoBehaviour
 		enabled = false;
 	}
 	
-	public void Loadings()
+	public void Loaded()
 	{
+		fadeOut.SetActive(true);
+		StartCoroutine(Loadings());
+	}
+	
+	IEnumerator Loadings()
+	{
+		yield return new WaitForSeconds(1f);
 		SceneManager.LoadScene("Assets/Scenes/Experimental Chaos.unity");
 	}
 }
