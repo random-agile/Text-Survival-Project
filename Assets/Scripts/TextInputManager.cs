@@ -45,9 +45,13 @@ public class TextInputManager : MonoBehaviour
 	
 	public Button endButton;
 	
+	public List<TextMeshProUGUI> actionCommand;
+	int commandFound;
+	public List<string> foundCommands;
+	
 	void Awake()
 	{
-		DontDestroyOnLoad(this.gameObject);
+		//DontDestroyOnLoad(this.gameObject);
 	}	
 	
 	void Start()
@@ -151,8 +155,7 @@ public class TextInputManager : MonoBehaviour
 			aS.clip = aC[5];
 			aS.Play();
 			checkFeed.PlayFeedbacks();
-			AddWord();
-			
+			AddWord();			
 		}
 		
 		if(theText == "lighter" && !foundWords.Contains("lighter"))
@@ -162,6 +165,51 @@ public class TextInputManager : MonoBehaviour
 			aS.Play();
 			checkFeed.PlayFeedbacks();
 			AddWord();
+		}
+		
+		if(theText == "Talk" && !foundWords.Contains("Talk"))
+		{
+			textMesh.color = Color.yellow;
+			aS.clip = aC[5];
+			aS.Play();
+			checkFeed.PlayFeedbacks();
+			AddCommand();
+		}
+		
+		if(theText == "Look" && !foundWords.Contains("Look"))
+		{
+			textMesh.color = Color.yellow;
+			aS.clip = aC[5];
+			aS.Play();
+			checkFeed.PlayFeedbacks();
+			AddCommand();
+		}
+		
+		if(theText == "Smell" && !foundWords.Contains("Smell"))
+		{
+			textMesh.color = Color.yellow;
+			aS.clip = aC[5];
+			aS.Play();
+			checkFeed.PlayFeedbacks();
+			AddCommand();
+		}
+		
+		if(theText == "Listen" && !foundWords.Contains("Listen"))
+		{
+			textMesh.color = Color.yellow;
+			aS.clip = aC[5];
+			aS.Play();
+			checkFeed.PlayFeedbacks();
+			AddCommand();
+		}
+		
+		if(theText == "Touch" && !foundWords.Contains("Touch"))
+		{
+			textMesh.color = Color.yellow;
+			aS.clip = aC[5];
+			aS.Play();
+			checkFeed.PlayFeedbacks();
+			AddCommand();
 		}
 		
 		if(theText.Length == 0)
@@ -297,6 +345,14 @@ public class TextInputManager : MonoBehaviour
 		bookWords++;
 		countTextWord.text = bookWords.ToString();
 		foundWords.Add(theText);
+	}
+	
+	void AddCommand()
+	{
+		actionCommand[commandFound].text = theText;
+		actionCommand[commandFound].color = textMesh.color;
+		commandFound++;
+		foundCommands.Add(theText);
 	}
 	
 }
