@@ -3953,6 +3953,7 @@ MonoBehaviour:
   TIM: {fileID: 1326602679}
   countText: {fileID: 1154332684}
   inputField: {fileID: 1436283637}
+  eraseCount: 10
   eraseButton: {fileID: 1479335151}
   aS: {fileID: 1942818072}
   aC: {fileID: 8300000, guid: da103c45c71b91b4980156c4ebc59e77, type: 3}

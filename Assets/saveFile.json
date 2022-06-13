@@ -1,1 +1,15 @@
-{"health":100}
+{
+    "nbOfErase": 9,
+    "nbOfWrite": 23,
+    "nbOfWords": 1,
+    "nbOfCommands": 4,
+    "allWordsFound": [
+        "lighter"
+    ],
+    "allCommandsFound": [
+        "Talk",
+        "Talk",
+        "Talk",
+        "Talk"
+    ]
+}

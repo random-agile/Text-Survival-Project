@@ -11,7 +11,7 @@ public class MouseEraser : MonoBehaviour
 	public TextInputManager TIM;
 	public TextMeshProUGUI countText;
 	public TMP_InputField inputField;
-	int eraseCount = 10;
+	public int eraseCount = 10;
 	public GameObject eraseButton;
 	public AudioSource aS;
 	public AudioClip aC;

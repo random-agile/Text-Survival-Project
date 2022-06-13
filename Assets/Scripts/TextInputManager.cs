@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using MoreMountains.Feedbacks;
+using System.IO;
 
 public class TextInputManager : MonoBehaviour
 {
@@ -49,11 +50,6 @@ public class TextInputManager : MonoBehaviour
 	int commandFound;
 	public List<string> foundCommands;
 	
-	void Awake()
-	{
-		//DontDestroyOnLoad(this.gameObject);
-	}	
-	
 	void Start()
 	{
 		I = this.gameObject.GetComponent<Inventory>();
@@ -62,6 +58,32 @@ public class TextInputManager : MonoBehaviour
 		Vector2 hotSpot = new Vector2(xspot,yspot);
 		Cursor.SetCursor(cursorTexture[0], hotSpot, CursorMode.Auto);
 		countText.text = writeCount.ToString();
+		
+		string json = File.ReadAllText(Application.dataPath + "/SaveFile.json");
+		SaveData data = JsonUtility.FromJson<SaveData>(json);
+		
+		writeCount = data.nbOfWrite;
+		ME.eraseCount = data.nbOfErase;
+		bookWords = data.nbOfWords;
+		commandFound = data.nbOfCommands;
+		foundWords = data.allWordsFound;
+		foundCommands = data.allCommandsFound;
+		
+		countText.text = writeCount.ToString();
+		countTextWord.text = bookWords.ToString();
+		ME.countText.text = ME.eraseCount.ToString();
+		
+		for (int i = 0; i < bookWords; i++)
+		{
+			bookTexts[i].text = foundWords[i];
+		}
+		
+		for (int i = 0; i < commandFound; i++)
+		{
+			actionCommand[i].text = foundCommands[i];
+		}
+		
+		Debug.Log(foundCommands[1]);
 	}	
 	
 	void Update()
@@ -158,7 +180,7 @@ public class TextInputManager : MonoBehaviour
 			AddWord();			
 		}
 		
-		if(theText == "lighter" && !foundWords.Contains("lighter"))
+		if(theText == "lighter" && !foundCommands.Contains("lighter"))
 		{
 			textMesh.color = Color.red;
 			aS.clip = aC[5];
@@ -167,7 +189,7 @@ public class TextInputManager : MonoBehaviour
 			AddWord();
 		}
 		
-		if(theText == "Talk" && !foundWords.Contains("Talk"))
+		if(theText == "Talk" && !foundCommands.Contains("Talk"))
 		{
 			textMesh.color = Color.yellow;
 			aS.clip = aC[5];
@@ -176,7 +198,7 @@ public class TextInputManager : MonoBehaviour
 			AddCommand();
 		}
 		
-		if(theText == "Look" && !foundWords.Contains("Look"))
+		if(theText == "Look" && !foundCommands.Contains("Look"))
 		{
 			textMesh.color = Color.yellow;
 			aS.clip = aC[5];
@@ -185,7 +207,7 @@ public class TextInputManager : MonoBehaviour
 			AddCommand();
 		}
 		
-		if(theText == "Smell" && !foundWords.Contains("Smell"))
+		if(theText == "Smell" && !foundCommands.Contains("Smell"))
 		{
 			textMesh.color = Color.yellow;
 			aS.clip = aC[5];
@@ -194,7 +216,7 @@ public class TextInputManager : MonoBehaviour
 			AddCommand();
 		}
 		
-		if(theText == "Listen" && !foundWords.Contains("Listen"))
+		if(theText == "Listen" && !foundCommands.Contains("Listen"))
 		{
 			textMesh.color = Color.yellow;
 			aS.clip = aC[5];
@@ -203,7 +225,7 @@ public class TextInputManager : MonoBehaviour
 			AddCommand();
 		}
 		
-		if(theText == "Touch" && !foundWords.Contains("Touch"))
+		if(theText == "Touch" && !foundCommands.Contains("Touch"))
 		{
 			textMesh.color = Color.yellow;
 			aS.clip = aC[5];
@@ -345,6 +367,18 @@ public class TextInputManager : MonoBehaviour
 		bookWords++;
 		countTextWord.text = bookWords.ToString();
 		foundWords.Add(theText);
+		
+		SaveData data = new SaveData();
+		
+		data.nbOfWrite = writeCount;
+		data.nbOfErase = ME.eraseCount;
+		data.nbOfWords = bookWords;
+		data.allWordsFound = foundWords;
+		data.nbOfCommands = commandFound;
+		data.allCommandsFound = foundCommands;
+		
+		string json = JsonUtility.ToJson(data, true);
+		File.WriteAllText(Application.dataPath + "/SaveFile.json", json);
 	}
 	
 	void AddCommand()
@@ -353,6 +387,18 @@ public class TextInputManager : MonoBehaviour
 		actionCommand[commandFound].color = textMesh.color;
 		commandFound++;
 		foundCommands.Add(theText);
+		
+		SaveData data = new SaveData();
+		
+		data.nbOfWrite = writeCount;
+		data.nbOfErase = ME.eraseCount;
+		data.nbOfCommands = commandFound;
+		data.allCommandsFound = foundCommands;
+		data.nbOfWords = bookWords;
+		data.allWordsFound = foundWords;
+		
+		string json = JsonUtility.ToJson(data, true);
+		File.WriteAllText(Application.dataPath + "/SaveFile.json", json);
 	}
 	
 }
