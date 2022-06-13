@@ -5,6 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
+	public Vector3 playerPos;
+	public Quaternion playerRot;
+	public Vector3 playerScale;
 	public int nbOfErase;
 	public int nbOfWrite;
 	public int nbOfWords;

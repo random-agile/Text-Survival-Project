@@ -1975,6 +1975,9 @@ MonoBehaviour:
   will: 1
   conviction: 1
   dexterity: 1
+  pos: {x: 20, y: -1.99, z: 0}
+  rot: {x: 0, y: 0, z: 0, w: 0}
+  scale: {x: 0, y: 0, z: 0}
 --- !u!1 &879417132
 GameObject:
   m_ObjectHideFlags: 0

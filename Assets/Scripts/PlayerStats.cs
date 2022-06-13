@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -12,5 +13,23 @@ public class PlayerStats : MonoBehaviour
 	public int will = 1;
 	public int conviction = 1;
 	public int dexterity = 1;
+	public Vector3 pos;
+	public Quaternion rot;
+	public Vector3 scale;
+	
+	void Awake()
+	{
+		
+		string json = File.ReadAllText(Application.dataPath + "/SaveFile.json");
+		SaveData data = JsonUtility.FromJson<SaveData>(json);
+		
+		pos = data.playerPos;
+		rot = data.playerRot;
+		scale = data.playerScale;
+		
+		this.gameObject.transform.position = pos;
+		this.gameObject.transform.rotation = rot;
+		this.gameObject.transform.localScale = scale;
+	}
 }
 
