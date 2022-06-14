@@ -29,8 +29,7 @@ public class PlayerController : MonoBehaviour
 	{
 		Application.targetFrameRate = 60;
 		targetGridPos = Vector3Int.RoundToInt(transform.position);
-		EM = this.GetComponent<EncounterManager>();
-		
+		EM = this.GetComponent<EncounterManager>();		
 	}
 	
 	private void Encounter()
@@ -45,8 +44,7 @@ public class PlayerController : MonoBehaviour
 	}
 	
 	private void FixedUpdate()
-	{		
-		
+	{				
 		if (Physics.Raycast(transform.position, Vector3.forward, out hit, 15) && hit.transform.tag == "Creature")
 		{			
 			Debug.Log("Did Hit");
@@ -63,8 +61,7 @@ public class PlayerController : MonoBehaviour
 			Debug.Log("Did Hit Wall");
 		}
 		
-		MovePlayer();
-		
+		MovePlayer();		
 		
 		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 15, Color.blue);
 	}	

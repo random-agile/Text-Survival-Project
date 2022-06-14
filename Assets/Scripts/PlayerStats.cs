@@ -18,10 +18,9 @@ public class PlayerStats : MonoBehaviour
 	public Vector3 scale;
 	
 	void Awake()
-	{
-		
-		string json = File.ReadAllText(Application.dataPath + "/SaveFile.json");
-		SaveData data = JsonUtility.FromJson<SaveData>(json);
+	{		
+		string json = File.ReadAllText(Application.dataPath + "/PosFile.json");
+		PosData data = JsonUtility.FromJson<PosData>(json);
 		
 		pos = data.playerPos;
 		rot = data.playerRot;

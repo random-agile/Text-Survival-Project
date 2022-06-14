@@ -59,31 +59,7 @@ public class TextInputManager : MonoBehaviour
 		Cursor.SetCursor(cursorTexture[0], hotSpot, CursorMode.Auto);
 		countText.text = writeCount.ToString();
 		
-		string json = File.ReadAllText(Application.dataPath + "/SaveFile.json");
-		SaveData data = JsonUtility.FromJson<SaveData>(json);
-		
-		writeCount = data.nbOfWrite;
-		ME.eraseCount = data.nbOfErase;
-		bookWords = data.nbOfWords;
-		commandFound = data.nbOfCommands;
-		foundWords = data.allWordsFound;
-		foundCommands = data.allCommandsFound;
-		
-		countText.text = writeCount.ToString();
-		countTextWord.text = bookWords.ToString();
-		ME.countText.text = ME.eraseCount.ToString();
-		
-		for (int i = 0; i < bookWords; i++)
-		{
-			bookTexts[i].text = foundWords[i];
-		}
-		
-		for (int i = 0; i < commandFound; i++)
-		{
-			actionCommand[i].text = foundCommands[i];
-		}
-		
-		Debug.Log(foundCommands[1]);
+		Load();
 	}	
 	
 	void Update()
@@ -367,7 +343,20 @@ public class TextInputManager : MonoBehaviour
 		bookWords++;
 		countTextWord.text = bookWords.ToString();
 		foundWords.Add(theText);
-		
+		Save();
+	}
+	
+	void AddCommand()
+	{
+		actionCommand[commandFound].text = theText;
+		actionCommand[commandFound].color = textMesh.color;
+		commandFound++;
+		foundCommands.Add(theText);
+		Save();
+	}
+	
+	void Save()
+	{
 		SaveData data = new SaveData();
 		
 		data.nbOfWrite = writeCount;
@@ -381,24 +370,31 @@ public class TextInputManager : MonoBehaviour
 		File.WriteAllText(Application.dataPath + "/SaveFile.json", json);
 	}
 	
-	void AddCommand()
+	void Load()
 	{
-		actionCommand[commandFound].text = theText;
-		actionCommand[commandFound].color = textMesh.color;
-		commandFound++;
-		foundCommands.Add(theText);
+		string json = File.ReadAllText(Application.dataPath + "/SaveFile.json");
+		SaveData data = JsonUtility.FromJson<SaveData>(json);
 		
-		SaveData data = new SaveData();
+		writeCount = data.nbOfWrite;
+		ME.eraseCount = data.nbOfErase;
+		bookWords = data.nbOfWords;
+		commandFound = data.nbOfCommands;
+		foundWords = data.allWordsFound;
+		foundCommands = data.allCommandsFound;
 		
-		data.nbOfWrite = writeCount;
-		data.nbOfErase = ME.eraseCount;
-		data.nbOfCommands = commandFound;
-		data.allCommandsFound = foundCommands;
-		data.nbOfWords = bookWords;
-		data.allWordsFound = foundWords;
+		countText.text = writeCount.ToString();
+		countTextWord.text = bookWords.ToString();
+		ME.countText.text = ME.eraseCount.ToString();
 		
-		string json = JsonUtility.ToJson(data, true);
-		File.WriteAllText(Application.dataPath + "/SaveFile.json", json);
+		for (int i = 0; i < bookWords; i++)
+		{
+			bookTexts[i].text = foundWords[i];
+		}
+		
+		for (int i = 0; i < commandFound; i++)
+		{
+			actionCommand[i].text = foundCommands[i];
+		}
 	}
 	
 }

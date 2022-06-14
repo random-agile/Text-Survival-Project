@@ -1,24 +1,12 @@
 {
-    "playerPos": {
-        "x": -0.0000019073486328125,
-        "y": -2.0,
-        "z": -0.000002384185791015625
-    },
-    "playerRot": {
-        "x": 0.0,
-        "y": 0.7071068286895752,
-        "z": 0.0,
-        "w": -0.7071068286895752
-    },
-    "playerScale": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "nbOfErase": 0,
-    "nbOfWrite": 0,
-    "nbOfWords": 0,
-    "nbOfCommands": 0,
-    "allWordsFound": [],
-    "allCommandsFound": []
+    "nbOfErase": 9,
+    "nbOfWrite": 39,
+    "nbOfWords": 1,
+    "nbOfCommands": 1,
+    "allWordsFound": [
+        "lighter"
+    ],
+    "allCommandsFound": [
+        "Talk"
+    ]
 }
