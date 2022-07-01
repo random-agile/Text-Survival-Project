@@ -17,7 +17,7 @@ public class PlayerStats : MonoBehaviour
 	public Quaternion rot;
 	public Vector3 scale;
 	
-	void Awake()
+	/*void Awake()
 	{		
 		string json = File.ReadAllText(Application.dataPath + "/PosFile.json");
 		PosData data = JsonUtility.FromJson<PosData>(json);
@@ -30,5 +30,7 @@ public class PlayerStats : MonoBehaviour
 		this.gameObject.transform.rotation = rot;
 		this.gameObject.transform.localScale = scale;
 	}
+	*/
+	
 }
 

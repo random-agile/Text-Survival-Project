@@ -1,12 +1,10 @@
 {
-    "nbOfErase": 9,
-    "nbOfWrite": 39,
+    "nbOfErase": 10,
+    "nbOfWrite": 43,
     "nbOfWords": 1,
-    "nbOfCommands": 1,
+    "nbOfCommands": 0,
     "allWordsFound": [
         "lighter"
     ],
-    "allCommandsFound": [
-        "Talk"
-    ]
+    "allCommandsFound": []
 }
