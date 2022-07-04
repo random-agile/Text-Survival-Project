@@ -57,6 +57,6 @@ public class EncounterManager : MonoBehaviour
 		yield return new WaitForSeconds(1.5f);
 		seSource.clip = nextPage;
 		seSource.Play();
-		//dialogBox.SetActive(true);		
+		dialogBox.SetActive(true);		
 	}
 }

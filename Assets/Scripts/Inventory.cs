@@ -14,6 +14,7 @@ public class Inventory : MonoBehaviour
 	
 	TextInputManager TIM;
 	PlayerStats PS;
+	PlayerInput PI;
 	
 	public GameObject fade;
 	
@@ -23,6 +24,7 @@ public class Inventory : MonoBehaviour
 	{
 		TIM = this.gameObject.GetComponent<TextInputManager>();
 		PS = this.gameObject.GetComponent<PlayerStats>();
+		PI = GameObject.FindWithTag("Player").GetComponent<PlayerInput>();
 		SetStats();
 	}
 	
@@ -94,7 +96,8 @@ public class Inventory : MonoBehaviour
 	IEnumerator Load()
 	{
 		yield return new WaitForSeconds(1f);
-		SceneManager.LoadScene("Assets/Scenes/Test.unity");
+		PI.isMenu = true;
+		Destroy(GameObject.Find("Menu(Clone)"));
 	}
 }
 

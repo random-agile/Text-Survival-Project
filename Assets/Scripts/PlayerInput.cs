@@ -13,6 +13,9 @@ public class PlayerInput : MonoBehaviour
 	public KeyCode turnRight = KeyCode.RightArrow;
 	
 	public GameObject fadeOut;
+	public List<GameObject> transitionObjects;
+	public GameObject menu;
+	public bool isMenu;
 	
 	PlayerController controller;
 	
@@ -27,6 +30,12 @@ public class PlayerInput : MonoBehaviour
 	    if(Input.GetKeyUp(backward)) controller.MoveBackward();
 	    if(Input.GetKeyUp(turnLeft)) controller.RotateLeft();
 	    if(Input.GetKeyUp(turnRight)) controller.RotateRight();
+	    
+	    if(isMenu)
+	    {
+	    	ExitMenu();
+	    	isMenu = false;
+	    }
     }
     
 	public void EnableScript()
@@ -56,8 +65,18 @@ public class PlayerInput : MonoBehaviour
 		string json = JsonUtility.ToJson(data, true);
 		File.WriteAllText(Application.dataPath + "/PosFile.json", json);
 		*/
-		
 		yield return new WaitForSeconds(1f);
-		SceneManager.LoadScene("Assets/Scenes/Experimental Chaos.unity");
+		fadeOut.SetActive(false);
+		foreach (var obj in transitionObjects)
+			obj.SetActive(false);
+		Instantiate(menu);
+		
+		//SceneManager.LoadScene("Assets/Scenes/Experimental Chaos.unity");		
+	}
+	
+	public void ExitMenu()
+	{
+		foreach (var obj in transitionObjects)
+			obj.SetActive(true);
 	}
 }

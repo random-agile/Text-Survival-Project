@@ -54,7 +54,7 @@ public class StalkerIA : MonoBehaviour
 			AbstractEnd();
 			yield return new WaitForSeconds(1f);
 			playerInput.EnableScript();
-			Waiting();			
+			Waiting();
 		}		
 	}
 	
