@@ -1,10 +1,13 @@
 {
-    "nbOfErase": 10,
-    "nbOfWrite": 43,
-    "nbOfWords": 1,
-    "nbOfCommands": 0,
+    "nbOfErase": 7,
+    "nbOfWrite": 100,
+    "nbOfWords": 2,
+    "nbOfCommands": 1,
     "allWordsFound": [
-        "lighter"
+        "lighter",
+        "Disgaea Horny"
     ],
-    "allCommandsFound": []
+    "allCommandsFound": [
+        "Talk"
+    ]
 }

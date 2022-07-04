@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 	public AudioClip heartBeat;
 	
 	RaycastHit hit;
+	bool isWall;
 	
 	private void Start()
 	{
@@ -56,14 +57,20 @@ public class PlayerController : MonoBehaviour
 			encounterSecurity = false;
 		}
 		
-		if (Physics.Raycast(transform.position, Vector3.forward, out hit, 15) && hit.transform.tag == "Wall")
+		if (Physics.Raycast(transform.position, Vector3.forward, out hit, 11) && hit.transform.tag == "Wall")
 		{
 			Debug.Log("Did Hit Wall");
+			isWall = true;			
+		}
+		else
+		{
+			Debug.Log("Stop Wall");
+			isWall = false;
 		}
 		
 		MovePlayer();		
 		
-		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 15, Color.blue);
+		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 11, Color.red);
 	}	
 		
 	
@@ -97,8 +104,8 @@ public class PlayerController : MonoBehaviour
 	
 	public void RotateLeft() { if(AtRest) targetRotation -= Vector3.up * 90f; }
 	public void RotateRight() { if(AtRest) targetRotation += Vector3.up * 90f; }
-	public void MoveForward() { if(AtRest) targetGridPos += transform.forward * playerMovement; asMoved = true;}
-	public void MoveBackward() { if(AtRest) targetGridPos -= transform.forward * playerMovement; asMoved = true;}
+	public void MoveForward() { if(AtRest  && !isWall) targetGridPos += transform.forward * playerMovement; asMoved = true;}
+	public void MoveBackward() { if(AtRest && !isWall) targetGridPos -= transform.forward * playerMovement; asMoved = true;}
 	
 	bool AtRest {
 		get {

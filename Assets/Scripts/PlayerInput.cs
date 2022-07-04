@@ -15,6 +15,7 @@ public class PlayerInput : MonoBehaviour
 	public GameObject fadeOut;
 	public List<GameObject> transitionObjects;
 	public GameObject menu;
+	public bool isMovementLocked;
 	public bool isMenu;
 	
 	PlayerController controller;
@@ -25,11 +26,14 @@ public class PlayerInput : MonoBehaviour
     }
 
 	private void Update()
-    {
+	{
+		if(!isMovementLocked)
+		{
 	    if(Input.GetKeyUp(forward)) controller.MoveForward();
 	    if(Input.GetKeyUp(backward)) controller.MoveBackward();
 	    if(Input.GetKeyUp(turnLeft)) controller.RotateLeft();
-	    if(Input.GetKeyUp(turnRight)) controller.RotateRight();
+		if(Input.GetKeyUp(turnRight)) controller.RotateRight();
+		}
 	    
 	    if(isMenu)
 	    {
@@ -65,6 +69,7 @@ public class PlayerInput : MonoBehaviour
 		string json = JsonUtility.ToJson(data, true);
 		File.WriteAllText(Application.dataPath + "/PosFile.json", json);
 		*/
+		isMovementLocked = true;
 		yield return new WaitForSeconds(1f);
 		fadeOut.SetActive(false);
 		foreach (var obj in transitionObjects)
