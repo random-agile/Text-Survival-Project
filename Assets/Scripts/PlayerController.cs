@@ -23,7 +23,8 @@ public class PlayerController : MonoBehaviour
 	public AudioSource seSource;
 	public AudioClip heartBeat;
 	
-	RaycastHit hit;
+	RaycastHit hitMonster;
+	RaycastHit hitWall;
 	bool isWall;
 	
 	private void Start()
@@ -46,10 +47,13 @@ public class PlayerController : MonoBehaviour
 	
 	private void FixedUpdate()
 	{				
-		if (Physics.Raycast(transform.position, Vector3.forward, out hit, 15) && hit.transform.tag == "Creature")
-		{			
+		if (Physics.Raycast(transform.position, transform.forward, out hitMonster, 25) && hitMonster.transform.tag == "Creature")
+		{	
+			if(!isWall)
+			{
 			Debug.Log("Did Hit");
-			Encounter();
+			Encounter();							
+			}						
 		}
 		else
 		{
@@ -57,12 +61,12 @@ public class PlayerController : MonoBehaviour
 			encounterSecurity = false;
 		}
 		
-		if (Physics.Raycast(transform.position, Vector3.forward, out hit, 11) && hit.transform.tag == "Wall")
+		if (Physics.Raycast(transform.position, transform.forward, out hitWall, 20) && hitWall.transform.tag == "Wall")
 		{
 			Debug.Log("Did Hit Wall");
-			isWall = true;			
+			isWall = true;	
 		}
-		else
+		else 
 		{
 			Debug.Log("Stop Wall");
 			isWall = false;
@@ -70,7 +74,7 @@ public class PlayerController : MonoBehaviour
 		
 		MovePlayer();		
 		
-		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 11, Color.red);
+		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 20, Color.red);
 	}	
 		
 	
@@ -102,10 +106,39 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 	
-	public void RotateLeft() { if(AtRest) targetRotation -= Vector3.up * 90f; }
-	public void RotateRight() { if(AtRest) targetRotation += Vector3.up * 90f; }
-	public void MoveForward() { if(AtRest  && !isWall) targetGridPos += transform.forward * playerMovement; asMoved = true;}
-	public void MoveBackward() { if(AtRest && !isWall) targetGridPos -= transform.forward * playerMovement; asMoved = true;}
+	public void RotateLeft() 
+	{ 
+		if(AtRest) 
+		{
+			targetRotation -= Vector3.up * 90f; 
+		}
+	}
+	
+	public void RotateRight() 
+	{ 
+		if(AtRest)
+		{
+			targetRotation += Vector3.up * 90f; 
+		}
+	}
+	
+	public void MoveForward() 
+	{ 
+		if(AtRest && !isWall)
+		{
+			targetGridPos += transform.forward * playerMovement; 
+			asMoved = true;
+		}
+	}
+	
+	public void MoveBackward() 
+	{ 
+		if(AtRest && !isWall) 
+		{
+			targetGridPos -= transform.forward * playerMovement; 
+			asMoved = true;
+		}
+	}
 	
 	bool AtRest {
 		get {
