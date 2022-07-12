@@ -23,9 +23,13 @@ public class PlayerController : MonoBehaviour
 	public AudioSource seSource;
 	public AudioClip heartBeat;
 	
-	RaycastHit hitMonster;
-	RaycastHit hitWall;
-	bool isWall;
+	RaycastHit hitMonsterFront;
+	RaycastHit hitMonsterBack;
+	RaycastHit hitWallFront;
+	RaycastHit hitWallBack;
+	bool isWallFront;
+	bool isWallBack;
+	bool isMonsterBack;
 	
 	private void Start()
 	{
@@ -47,34 +51,60 @@ public class PlayerController : MonoBehaviour
 	
 	private void FixedUpdate()
 	{				
-		if (Physics.Raycast(transform.position, transform.forward, out hitMonster, 25) && hitMonster.transform.tag == "Creature")
+		if (Physics.Raycast(transform.position, transform.forward, out hitMonsterFront, 25) && hitMonsterFront.transform.tag == "Creature")
 		{	
-			if(!isWall)
+			if(!isWallFront)
 			{
-			Debug.Log("Did Hit");
+			Debug.Log("Did Hit Front");
 			Encounter();							
 			}						
 		}
 		else
 		{
-			Debug.Log("Stop Hit");
+			Debug.Log("Stop Hit Front");
 			encounterSecurity = false;
 		}
 		
-		if (Physics.Raycast(transform.position, transform.forward, out hitWall, 20) && hitWall.transform.tag == "Wall")
+		if (Physics.Raycast(transform.position, transform.forward * -1, out hitMonsterBack, 25) && hitMonsterBack.transform.tag == "Creature")
+		{	
+			if(!isWallBack)
+			{
+				Debug.Log("Did Hit Back");
+				isMonsterBack = true;							
+			}						
+		}
+		else
 		{
-			Debug.Log("Did Hit Wall");
-			isWall = true;	
+			Debug.Log("Stop Hit Back");
+			isMonsterBack = false;
+		}
+		
+		if (Physics.Raycast(transform.position, transform.forward, out hitWallFront, 15) && hitWallFront.transform.tag == "Wall")
+		{
+			Debug.Log("Did Hit Wall Front");
+			isWallFront = true;	
 		}
 		else 
 		{
-			Debug.Log("Stop Wall");
-			isWall = false;
+			Debug.Log("Stop Wall Front");
+			isWallFront = false;
+		}
+		
+		if (Physics.Raycast(transform.position, transform.forward * -1, out hitWallBack, 15) && hitWallBack.transform.tag == "Wall")
+		{
+			Debug.Log("Did Hit Wall Back");
+			isWallBack = true;	
+		}
+		else 
+		{
+			Debug.Log("Stop Wall Back");
+			isWallBack = false;
 		}
 		
 		MovePlayer();		
 		
-		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 20, Color.red);
+		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 15, Color.red);
+		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * -1) * 15, Color.blue);
 	}	
 		
 	
@@ -124,7 +154,7 @@ public class PlayerController : MonoBehaviour
 	
 	public void MoveForward() 
 	{ 
-		if(AtRest && !isWall)
+		if(AtRest && !isWallFront)
 		{
 			targetGridPos += transform.forward * playerMovement; 
 			asMoved = true;
@@ -133,7 +163,7 @@ public class PlayerController : MonoBehaviour
 	
 	public void MoveBackward() 
 	{ 
-		if(AtRest && !isWall) 
+		if(AtRest && !isWallBack && !isMonsterBack) 
 		{
 			targetGridPos -= transform.forward * playerMovement; 
 			asMoved = true;
