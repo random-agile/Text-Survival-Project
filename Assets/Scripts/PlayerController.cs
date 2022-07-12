@@ -31,6 +31,8 @@ public class PlayerController : MonoBehaviour
 	bool isWallBack;
 	bool isMonsterBack;
 	
+	public bool isNote;
+	
 	private void Start()
 	{
 		Application.targetFrameRate = 60;
@@ -55,13 +57,13 @@ public class PlayerController : MonoBehaviour
 		{	
 			if(!isWallFront)
 			{
-			Debug.Log("Did Hit Front");
+			//Debug.Log("Did Hit Front");
 			Encounter();							
 			}						
 		}
 		else
 		{
-			Debug.Log("Stop Hit Front");
+			//Debug.Log("Stop Hit Front");
 			encounterSecurity = false;
 		}
 		
@@ -69,35 +71,35 @@ public class PlayerController : MonoBehaviour
 		{	
 			if(!isWallBack)
 			{
-				Debug.Log("Did Hit Back");
+				//Debug.Log("Did Hit Back");
 				isMonsterBack = true;							
 			}						
 		}
 		else
 		{
-			Debug.Log("Stop Hit Back");
+			//Debug.Log("Stop Hit Back");
 			isMonsterBack = false;
 		}
 		
 		if (Physics.Raycast(transform.position, transform.forward, out hitWallFront, 15) && hitWallFront.transform.tag == "Wall")
 		{
-			Debug.Log("Did Hit Wall Front");
+			//Debug.Log("Did Hit Wall Front");
 			isWallFront = true;	
 		}
 		else 
 		{
-			Debug.Log("Stop Wall Front");
+			//Debug.Log("Stop Wall Front");
 			isWallFront = false;
 		}
 		
 		if (Physics.Raycast(transform.position, transform.forward * -1, out hitWallBack, 15) && hitWallBack.transform.tag == "Wall")
 		{
-			Debug.Log("Did Hit Wall Back");
+			//Debug.Log("Did Hit Wall Back");
 			isWallBack = true;	
 		}
 		else 
 		{
-			Debug.Log("Stop Wall Back");
+			//Debug.Log("Stop Wall Back");
 			isWallBack = false;
 		}
 		
@@ -106,6 +108,22 @@ public class PlayerController : MonoBehaviour
 		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 15, Color.red);
 		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * -1) * 15, Color.blue);
 	}	
+	
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.CompareTag("Note"))
+		{
+			isNote = true;
+		}
+	}
+	
+	private void OnTriggerExit(Collider other)
+	{
+		if(other.CompareTag("Note"))
+		{
+			isNote = false;
+		}
+	}
 		
 	
 	void MovePlayer()

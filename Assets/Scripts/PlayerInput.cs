@@ -58,6 +58,14 @@ public class PlayerInput : MonoBehaviour
 		StartCoroutine(Loadings());
 	}
 	
+	public void Search()
+	{
+		if(controller.isNote)
+		{
+			Debug.Log("ça marche gros con !");
+		}
+	}
+	
 	IEnumerator Loadings()
 	{
 		/*PosData data = new PosData();
