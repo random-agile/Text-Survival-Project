@@ -14,24 +14,29 @@ public class WriteDialog : MonoBehaviour
 	public string originalText;
 	public TMP_Text uiText;
 	int textState;
-	//public double delay = 0.02f;
+	
+	public List <string> eventExt;
+	public bool isTextEvent;
 	
 	void Awake()
 	{
-		originalText = uiText.text;
 		uiText.text = null;
-	    StartCoroutine(ShowText());
+		originalText = uiText.text;
+		//StartCoroutine(ShowText());
     }
     
 	void Update()
-	{
+	{		
+		if(isTextEvent)
+		{
+			originalText = eventExt[0];
+			StartCoroutine(ShowText());
+		}
 		
-		if(Input.GetKeyUp(enter)) 
-			if(textState == 0) Next();
-			else if(textState == 1) NextTwo();
-			else if(textState == 2) NextThree();
-			else if(textState == 3) NextFour();
-			else if(textState == 4) NextFive();
+		if(Input.GetKeyUp(enter) && isTextEvent)
+		{
+			
+		}
 	}
 
 	IEnumerator ShowText()
@@ -44,37 +49,20 @@ public class WriteDialog : MonoBehaviour
 		endBox.SetActive(true);
 	}
 	
+	void EventAbstract()
+	{
+		foreach(var x in eventExt)
+		{
+			
+		}
+	}
+	
+	
+	
 	void Next()
 	{
 		AbstractNext();
 		originalText = "Should I run ? Should i attack them ? Should i negotiate ???";
-		uiText.text = null;
-		textState++;
-		StartCoroutine(ShowText());
-	}
-	
-	void NextTwo()
-	{
-		AbstractNext();
-		originalText = "Ton grand père est partit se faire des implantations de cheveux en turquie.";
-		uiText.text = null;
-		textState++;
-		StartCoroutine(ShowText());
-	}
-	
-	void NextThree()
-	{
-		AbstractNext();
-		originalText = "Je l'ai le pass sanitaire, voilà, la serveuse est venue puis ma scanner le qr code et le tour joué, moi j'dis allons y quoi.";
-		uiText.text = null;
-		textState++;
-		StartCoroutine(ShowText());
-	}
-	
-	void NextFour()
-	{
-		AbstractNext();
-		originalText = "I have the vaccine card, there you go, the waiter scanned it and that's it !";
 		uiText.text = null;
 		textState++;
 		StartCoroutine(ShowText());

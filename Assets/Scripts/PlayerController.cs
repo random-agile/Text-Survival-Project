@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 	bool isWallBack;
 	bool isMonsterBack;
 	
-	public bool isNote;
 	
 	private void Start()
 	{
@@ -108,24 +107,8 @@ public class PlayerController : MonoBehaviour
 		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 15, Color.red);
 		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * -1) * 15, Color.blue);
 	}	
-	
-	private void OnTriggerEnter(Collider other)
-	{
-		if(other.CompareTag("Note"))
-		{
-			isNote = true;
-		}
-	}
-	
-	private void OnTriggerExit(Collider other)
-	{
-		if(other.CompareTag("Note"))
-		{
-			isNote = false;
-		}
-	}
-		
-	
+			
+			
 	void MovePlayer()
 	{
 		if (true)
