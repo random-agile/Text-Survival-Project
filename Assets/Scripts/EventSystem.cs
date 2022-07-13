@@ -8,6 +8,8 @@ public class EventSystem : MonoBehaviour
 	string text;
 	WriteDialog WD;
 	
+	public bool isCheckedOne;
+	
 	public GameObject dialogBox;
 	
 	void Awake()
@@ -34,7 +36,7 @@ public class EventSystem : MonoBehaviour
 	{
 		if(isEvent > 0)
 		{
-			if(isEvent == 1)
+			if(isEvent == 1 && !isCheckedOne)
 			{
 				text = "Looks like a piece of paper, but it is blank...";
 				AbstractAdd();
