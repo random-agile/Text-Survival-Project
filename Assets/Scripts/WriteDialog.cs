@@ -16,12 +16,16 @@ public class WriteDialog : MonoBehaviour
 	int textState;
 	
 	public List <string> eventExt;
+	public List <string> nothingExt;
 	public bool isTextEvent;
+	public bool isNothing;
 	int loopControl =1;
 	bool updateSecurity;
 	
 	public GameObject searchBox;
 	public GameObject menuBox;
+	
+	public GameObject eventOne;
 	
 	EventSystem ES;
 	
@@ -33,46 +37,57 @@ public class WriteDialog : MonoBehaviour
     }
     
 	void Update()
-	{		
-		Debug.Log(loopControl);
-		Debug.Log(eventExt.Count -1);
-		
+	{				
 		if(isTextEvent && !updateSecurity)
 		{
-			audioSrc.clip = turningPage;
-			audioSrc.Play();
-			searchBox.SetActive(false);
-			menuBox.SetActive(false);
+			AbstractStart();
 			originalText = eventExt[loopControl -1];
 			StartCoroutine(ShowText());
-			updateSecurity = true;
 		}
 		
 		if(Input.GetKeyUp(enter) && isTextEvent)
 		{
 			if(loopControl > eventExt.Count -1)
 			{
-				endBox.SetActive(false);
-				itemBox.SetActive(false);
+				AbstractEnd();				
 				isTextEvent = false;
-				loopControl = 1;
-				searchBox.SetActive(true);
-				menuBox.SetActive(true);
 				eventExt.Clear();
-				updateSecurity = false;
-				ES.isCheckedOne = true;
+				eventOne.SetActive(false);
+				ES.isEvent = 0;
 			}
 			
 			if(loopControl <= eventExt.Count -1)
 			{
 				AbstractNext();
 				originalText = eventExt[loopControl];
-				uiText.text = null;
-				loopControl++;
+				AbstractNextFollow();
 				StartCoroutine(ShowText());
 			}
 		}
-	}	
+		
+		if(isNothing && !updateSecurity)
+		{
+			AbstractStart();
+			originalText = nothingExt[loopControl -1];
+			StartCoroutine(ShowText());
+		}
+		
+		if(Input.GetKeyUp(enter) && isNothing)
+		{
+			AbstractEnd();
+			nothingExt.Clear();
+			isNothing = false;
+		}
+	}
+	
+	void AbstractStart()
+	{
+		updateSecurity = true;
+		audioSrc.clip = turningPage;
+		audioSrc.Play();
+		searchBox.SetActive(false);
+		menuBox.SetActive(false);
+	}
 		
 	void AbstractNext()
 	{
@@ -81,13 +96,29 @@ public class WriteDialog : MonoBehaviour
 		audioSrc.Play();
 		uiText.text = null;
 	}
+	
+	void AbstractNextFollow()
+	{
+		uiText.text = null;
+		loopControl++;
+	}
+	
+	void AbstractEnd()
+	{
+		endBox.SetActive(false);
+		itemBox.SetActive(false);
+		updateSecurity = false;
+		loopControl = 1;
+		searchBox.SetActive(true);
+		menuBox.SetActive(true);
+	}
 
 	IEnumerator ShowText()
 	{
 		for (int i =0; i <= originalText.Length; i++)
 		{
 			uiText.text = originalText.Substring(0,i);
-			yield return new WaitForSeconds(0.02f);			
+			yield return new WaitForSeconds(0.005f);			
 		}
 		endBox.SetActive(true);
 	}	

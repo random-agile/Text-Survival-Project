@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 	
 	private void FixedUpdate()
 	{				
-		if (Physics.Raycast(transform.position, transform.forward, out hitMonsterFront, 25) && hitMonsterFront.transform.tag == "Creature")
+		if (Physics.Raycast(transform.position, transform.forward, out hitMonsterFront, 20) && hitMonsterFront.transform.tag == "Creature")
 		{	
 			if(!isWallFront)
 			{
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
 			encounterSecurity = false;
 		}
 		
-		if (Physics.Raycast(transform.position, transform.forward * -1, out hitMonsterBack, 25) && hitMonsterBack.transform.tag == "Creature")
+		if (Physics.Raycast(transform.position, transform.forward * -1, out hitMonsterBack, 20) && hitMonsterBack.transform.tag == "Creature")
 		{	
 			if(!isWallBack)
 			{
