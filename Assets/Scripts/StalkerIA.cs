@@ -15,8 +15,7 @@ public class StalkerIA : MonoBehaviour
 	bool oneTrigger;
 	bool asWaited;
 	bool securityWait;
-	public GameObject menuOne;
-	public GameObject menuTwo;
+	public List <GameObject> menu;
 	
 	void Start()
 	{
@@ -38,8 +37,10 @@ public class StalkerIA : MonoBehaviour
 	{
 		if (wait == 0)
 		{
-			menuOne.SetActive(false);
-			menuTwo.SetActive(false);
+			foreach (var obj in menu)
+			{
+				obj.SetActive(false);
+			}
 			StateCheck();			
 			whiteDot.transform.position += new Vector3(-64f * Time.deltaTime, 0f, 0f);
 			yield return new WaitForSeconds(1f);
@@ -51,8 +52,10 @@ public class StalkerIA : MonoBehaviour
 		
 		else if(wait == 1)
 		{
-			menuOne.SetActive(false);
-			menuTwo.SetActive(false);
+			foreach (var obj in menu)
+			{
+				obj.SetActive(false);
+			}
 			StateCheck();
 			this.transform.position += new Vector3(20f * Time.deltaTime, 0f, 0f );
 			whiteDot.transform.position += new Vector3(0, 64f * Time.deltaTime, 0f);
@@ -88,8 +91,10 @@ public class StalkerIA : MonoBehaviour
 	{
 		if(!asWaited)
 		{
-			menuOne.SetActive(true);
-			menuTwo.SetActive(true);
+			foreach (var obj in menu)
+			{
+				obj.SetActive(true);
+			}
 			wait++;
 			asWaited = true;
 		}

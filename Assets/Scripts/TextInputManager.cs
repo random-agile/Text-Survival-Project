@@ -167,47 +167,27 @@ public class TextInputManager : MonoBehaviour
 		
 		if(theText == "Talk" && !foundCommands.Contains("Talk"))
 		{
-			textMesh.color = Color.yellow;
-			aS.clip = aC[5];
-			aS.Play();
-			checkFeed.PlayFeedbacks();
-			AddCommand();
+			AbstractAddCommand();
 		}
 		
 		if(theText == "Look" && !foundCommands.Contains("Look"))
 		{
-			textMesh.color = Color.yellow;
-			aS.clip = aC[5];
-			aS.Play();
-			checkFeed.PlayFeedbacks();
-			AddCommand();
+			AbstractAddCommand();
 		}
 		
 		if(theText == "Smell" && !foundCommands.Contains("Smell"))
 		{
-			textMesh.color = Color.yellow;
-			aS.clip = aC[5];
-			aS.Play();
-			checkFeed.PlayFeedbacks();
-			AddCommand();
+			AbstractAddCommand();
 		}
 		
 		if(theText == "Listen" && !foundCommands.Contains("Listen"))
 		{
-			textMesh.color = Color.yellow;
-			aS.clip = aC[5];
-			aS.Play();
-			checkFeed.PlayFeedbacks();
-			AddCommand();
+			AbstractAddCommand();
 		}
 		
 		if(theText == "Touch" && !foundCommands.Contains("Touch"))
 		{
-			textMesh.color = Color.yellow;
-			aS.clip = aC[5];
-			aS.Play();
-			checkFeed.PlayFeedbacks();
-			AddCommand();
+			AbstractAddCommand();
 		}
 		
 		if(theText.Length == 0)
@@ -219,6 +199,20 @@ public class TextInputManager : MonoBehaviour
 		}
 		
 		endButton.Select();
+	}
+	
+	void AbstractAddCommand()
+	{
+		textMesh.color = Color.yellow;
+		aS.clip = aC[5];
+		aS.Play();
+		checkFeed.PlayFeedbacks();
+		AddCommand();
+	}
+	
+	void AbstractAddWord()
+	{
+		
 	}
 	
 	public void ScribbleSound()

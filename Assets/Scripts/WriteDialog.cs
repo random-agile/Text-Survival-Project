@@ -22,8 +22,7 @@ public class WriteDialog : MonoBehaviour
 	int loopControl =1;
 	bool updateSecurity;
 	
-	public GameObject searchBox;
-	public GameObject menuBox;
+	public List <GameObject> menu;
 	
 	public GameObject eventOne;
 	
@@ -85,8 +84,10 @@ public class WriteDialog : MonoBehaviour
 		updateSecurity = true;
 		audioSrc.clip = turningPage;
 		audioSrc.Play();
-		searchBox.SetActive(false);
-		menuBox.SetActive(false);
+		foreach (var obj in menu)
+		{
+			obj.SetActive(false);
+		}
 	}
 		
 	void AbstractNext()
@@ -109,8 +110,10 @@ public class WriteDialog : MonoBehaviour
 		itemBox.SetActive(false);
 		updateSecurity = false;
 		loopControl = 1;
-		searchBox.SetActive(true);
-		menuBox.SetActive(true);
+		foreach (var obj in menu)
+		{
+			obj.SetActive(true);
+		}
 	}
 
 	IEnumerator ShowText()
