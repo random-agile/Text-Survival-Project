@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using TMPro;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -16,6 +18,18 @@ public class PlayerStats : MonoBehaviour
 	public Vector3 pos;
 	public Quaternion rot;
 	public Vector3 scale;
+	
+	public TMP_Text hpText;
+	public TMP_Text spText;
+	
+	public Slider hpSlider;
+	public Slider spSlider;
+	
+	void Awake()
+	{
+		hpText.text = hpSlider.value.ToString();
+		spText.text = spSlider.value.ToString();
+	}
 	
 	/*void Awake()
 	{		
