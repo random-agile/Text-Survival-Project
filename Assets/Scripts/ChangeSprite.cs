@@ -8,15 +8,18 @@ public class ChangeSprite : MonoBehaviour
 	public List<Sprite> spriteList;	
 	private int completed;
 	private int wait;
-	private GameObject player;
-	private Transform pos;
+	//private GameObject player;
+	//private Transform pos;
+	public GameObject empty;
+	public Transform pos;
 	
     void Start()
 	{
 		originalSprite.sprite = spriteList[0];
 		completed++;
-		player = GameObject.FindWithTag("Player");
-		pos = player.GetComponent<Transform>();
+		//player = GameObject.FindWithTag("Player");
+		//pos = player.GetComponent<Transform>();
+		pos = empty.GetComponent<Transform>();
 	}
     
 	void Update()

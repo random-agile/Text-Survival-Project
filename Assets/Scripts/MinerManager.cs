@@ -12,16 +12,13 @@ public class MinerManager : MonoBehaviour
 	private int completed;
 	private int wait;
 	public int state;
-	private GameObject player;
-	private Transform pos;
+	public Transform pos;
 	public Animator anims;
 	
 	
 	void Start()
 	{
 		originalSprite.sprite = idleList[0];
-		player = GameObject.FindWithTag("Player");
-		pos = player.GetComponent<Transform>();
 	}
     
 	void Update()
