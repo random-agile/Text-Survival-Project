@@ -26,13 +26,13 @@ public class WriteDialog : MonoBehaviour
 	
 	public GameObject eventOne;
 	
-	EventSystem ES;
+	EventsSystem ES;
 	
 	void Awake()
 	{
 		uiText.text = null;
 		originalText = uiText.text;
-		ES = GameObject.Find("Player").GetComponent<EventSystem>();
+		ES = GameObject.Find("Player").GetComponent<EventsSystem>();
     }
     
 	void Update()

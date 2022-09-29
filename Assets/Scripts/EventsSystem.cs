@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventSystem : MonoBehaviour
+public class EventsSystem : MonoBehaviour
 {
 	public int isEvent;
 	string text;
