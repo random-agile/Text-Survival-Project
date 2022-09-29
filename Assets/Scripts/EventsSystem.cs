@@ -31,6 +31,10 @@ public class EventsSystem : MonoBehaviour
 		{
 			isEvent = 2;
 		}
+		else if(other.gameObject.name == "BlueKey")
+		{
+			isEvent = 3;
+		}
 	}
 	
 	private void OnTriggerExit(Collider other)
@@ -67,6 +71,18 @@ public class EventsSystem : MonoBehaviour
 				WD.isTextEvent = true;
 				dialogBox.SetActive(true);
 				itemName = "Allumette";
+				IS.AddItem(itemName);
+			}
+			
+			else if(isEvent == 3)
+			{
+				text = "A blue key, seems important.";
+				AbstractAdd();
+				text = "Obtained a <color=blue>blue key</color>.";
+				AbstractAdd();
+				WD.isTextEvent = true;
+				dialogBox.SetActive(true);
+				itemName = "BlueKey";
 				IS.AddItem(itemName);
 			}
 		}

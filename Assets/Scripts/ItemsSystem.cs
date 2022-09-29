@@ -8,22 +8,25 @@ public class ItemsSystem : MonoBehaviour
 	public List <Sprite> itemsContainer;
 	public List <Image> itemsMenu;
 	public Sprite newItem;
-
+	int itemsNb;
 	
 	public void AddItem(string item)
 	{
 		switch(item)
 		{
 		case "Allumette":
-			newItem = itemsContainer[0];
-			itemsMenu[0].sprite = newItem;
-			itemsMenu[0].GetComponent<Image>().SetNativeSize();
-		break;
+			newItem = itemsContainer[0];			
+			itemsMenu[itemsNb].sprite = newItem;
+			itemsMenu[itemsNb].GetComponent<Image>().SetNativeSize();
+			itemsNb++;
+			break;
+		case "BlueKey":
+			newItem = itemsContainer[1];			
+			itemsMenu[itemsNb].sprite = newItem;
+			itemsMenu[itemsNb].GetComponent<Image>().SetNativeSize();
+			itemsNb++;
+			break;
 		}
 	}
-	
-	void AddInventory()
-	{
-
-	}
 }
+

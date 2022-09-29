@@ -5,6 +5,7 @@ using UnityEngine;
 public class StalkerIA : MonoBehaviour
 {
 	public AudioSource seSource;
+	public AudioClip seFoots;
 	PlayerController playerController;
 	PlayerInput playerInput;
 	public bool stalkerState;
@@ -75,6 +76,7 @@ public class StalkerIA : MonoBehaviour
 		if(!oneTrigger)
 		{
 			playerInput.DisableScript();
+			seSource.clip = seFoots;
 			seSource.Play();
 			oneTrigger = true;
 		}

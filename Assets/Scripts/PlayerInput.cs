@@ -14,6 +14,8 @@ public class PlayerInput : MonoBehaviour
 	public KeyCode turnRight = KeyCode.RightArrow;
 	public KeyCode items = KeyCode.A;
 	
+	public AudioSource aS;
+	public List <AudioClip> aC;
 	public GameObject fadeOut;
 	public List<GameObject> transitionObjects;
 	public GameObject menu;
@@ -65,6 +67,8 @@ public class PlayerInput : MonoBehaviour
     
 	public void OpenItems()
 	{
+		aS.clip = aC[0];
+		aS.Play();
 		isMovementLocked = true;
 		isItemMenu = true;
 		HUD.SetActive(false);
@@ -74,6 +78,8 @@ public class PlayerInput : MonoBehaviour
 	
 	public void CloseItems()
 	{
+		aS.clip = aC[1];
+		aS.Play();
 		isMovementLocked = false;
 		isItemMenu = false;
 		HUD.SetActive(true);
