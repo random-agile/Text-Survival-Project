@@ -31,7 +31,6 @@ public class PlayerInput : MonoBehaviour
 	{
 	    controller = GetComponent<PlayerController>();
 	    IS = this.GetComponent<ItemsSystem>();
-	    ItemHUD.SetActive(false);
     }
 
 	private void Update()

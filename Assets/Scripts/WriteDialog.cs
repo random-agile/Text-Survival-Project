@@ -24,7 +24,7 @@ public class WriteDialog : MonoBehaviour
 	
 	public List <GameObject> menu;
 	
-	public GameObject eventOne;
+	public GameObject actualEvent;
 	
 	EventsSystem ES;
 	
@@ -51,7 +51,7 @@ public class WriteDialog : MonoBehaviour
 				AbstractEnd();				
 				isTextEvent = false;
 				eventExt.Clear();
-				eventOne.SetActive(false);
+				actualEvent.SetActive(false);
 				ES.isEvent = 0;
 			}
 			
