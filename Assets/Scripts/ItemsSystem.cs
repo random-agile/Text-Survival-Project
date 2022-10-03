@@ -39,16 +39,19 @@ public class ItemsSystem : MonoBehaviour
 			{
 				Debug.Log(isPlace[i]);
 			}
+			
 			else if(!isPlace[i])
 			{
 				isPlace[i] = true;
 				itemsNb = i;
 				return;
 			}
-			else
+			
+			if(isPlace.TrueForAll(x => x))
 			{
-				Debug.Log("c'est plein");
+				Debug.Log("c'est pleinos");
 			}
+			
 		}
 	}
 }
