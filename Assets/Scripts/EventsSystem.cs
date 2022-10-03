@@ -71,6 +71,7 @@ public class EventsSystem : MonoBehaviour
 				WD.isTextEvent = true;
 				dialogBox.SetActive(true);
 				itemName = "Allumette";
+				IS.CheckPlace();
 				IS.AddItem(itemName);
 			}
 			
@@ -83,6 +84,7 @@ public class EventsSystem : MonoBehaviour
 				WD.isTextEvent = true;
 				dialogBox.SetActive(true);
 				itemName = "BlueKey";
+				IS.CheckPlace();
 				IS.AddItem(itemName);
 			}
 		}

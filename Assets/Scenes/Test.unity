@@ -8499,14 +8499,24 @@ MonoBehaviour:
   - {fileID: 21300000, guid: febc7afc6add84949b8e0adb31672c01, type: 3}
   itemsMenu:
   - {fileID: 1112113352}
-  - {fileID: 1921411569}
-  - {fileID: 1845721404}
   - {fileID: 1057855844}
-  - {fileID: 235190890}
   - {fileID: 1810780744}
-  - {fileID: 397638663}
   - {fileID: 604300676}
+  - {fileID: 1845721404}
+  - {fileID: 1921411569}
+  - {fileID: 235190890}
+  - {fileID: 397638663}
   newItem: {fileID: 0}
+  isPlace: 0000000000000000
+  itemName:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!1 &893389529
 GameObject:
   m_ObjectHideFlags: 0
@@ -21885,7 +21895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1912213473
 RectTransform:
   m_ObjectHideFlags: 0
@@ -25391,7 +25401,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5251575618127272907, guid: 925a91c4bdd90df46bd58f1220d20e08, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 925a91c4bdd90df46bd58f1220d20e08, type: 3}
