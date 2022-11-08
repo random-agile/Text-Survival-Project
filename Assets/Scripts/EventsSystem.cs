@@ -2,36 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventSystem : MonoBehaviour
+public class EventsSystem : MonoBehaviour
 {
 	public int isEvent;
 	string text;
 	WriteDialog WD;
-	
+	ItemsSystem IS;
 	public GameObject dialogBox;
+	string itemName;
 	
 	void Awake()
 	{
 		dialogBox.SetActive(true);
 		WD = GameObject.Find("DialogBox/Text").GetComponent<WriteDialog>();
+		IS = this.gameObject.GetComponent<ItemsSystem>();
 		dialogBox.SetActive(false);
 	}
 	
 	private void OnTriggerEnter(Collider other)
 	{
+		WD.actualEvent = other.gameObject;
+		
 		if(other.gameObject.name == "Note 1")
 		{
 			isEvent = 1;
+		}
+		else if(other.gameObject.name == "Allumette")
+		{
+			isEvent = 2;
+		}
+		else if(other.gameObject.name == "BlueKey")
+		{
+			isEvent = 3;
 		}
 	}
 	
 	private void OnTriggerExit(Collider other)
 	{
-			isEvent = 0;
+		isEvent = 0;
+		WD.actualEvent = null;			
 	}
 	
 	public void Search()
 	{
+		
 		if(isEvent > 0)
 		{
 			if(isEvent == 1)
@@ -46,6 +60,32 @@ public class EventSystem : MonoBehaviour
 				AbstractAdd();
 				WD.isTextEvent = true;
 				dialogBox.SetActive(true);
+			}
+			
+			else if(isEvent == 2)
+			{
+				text = "A matchstick box, always useful.";
+				AbstractAdd();
+				text = "Obtained a <color=red>matchstick box</color>.";
+				AbstractAdd();
+				WD.isTextEvent = true;
+				dialogBox.SetActive(true);
+				itemName = "Allumette";
+				IS.CheckPlace();
+				IS.AddItem(itemName);
+			}
+			
+			else if(isEvent == 3)
+			{
+				text = "A blue key, seems important.";
+				AbstractAdd();
+				text = "Obtained a <color=blue>blue key</color>.";
+				AbstractAdd();
+				WD.isTextEvent = true;
+				dialogBox.SetActive(true);
+				itemName = "BlueKey";
+				IS.CheckPlace();
+				IS.AddItem(itemName);
 			}
 		}
 		

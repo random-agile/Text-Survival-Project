@@ -24,15 +24,15 @@ public class WriteDialog : MonoBehaviour
 	
 	public List <GameObject> menu;
 	
-	public GameObject eventOne;
+	public GameObject actualEvent;
 	
-	EventSystem ES;
+	EventsSystem ES;
 	
 	void Awake()
 	{
 		uiText.text = null;
 		originalText = uiText.text;
-		ES = GameObject.Find("Player").GetComponent<EventSystem>();
+		ES = GameObject.Find("Player").GetComponent<EventsSystem>();
     }
     
 	void Update()
@@ -51,7 +51,7 @@ public class WriteDialog : MonoBehaviour
 				AbstractEnd();				
 				isTextEvent = false;
 				eventExt.Clear();
-				eventOne.SetActive(false);
+				actualEvent.SetActive(false);
 				ES.isEvent = 0;
 			}
 			
