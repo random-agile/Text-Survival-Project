@@ -57,9 +57,7 @@ public class EventsSystem : MonoBehaviour
 				text = "I could also write stuff on it... After all considering the situation i'm in right now, It could be a way to stay sane...";
 				AbstractAdd();
 				text = "Obtained a <color=red>small paper</color>.";
-				AbstractAdd();
-				WD.isTextEvent = true;
-				dialogBox.SetActive(true);
+				AbstractEnd();
 			}
 			
 			else if(isEvent == 2)
@@ -67,9 +65,7 @@ public class EventsSystem : MonoBehaviour
 				text = "A matchstick box, always useful.";
 				AbstractAdd();
 				text = "Obtained a <color=red>matchstick box</color>.";
-				AbstractAdd();
-				WD.isTextEvent = true;
-				dialogBox.SetActive(true);
+				AbstractEnd();
 				itemName = "Allumette";
 				IS.CheckPlace();
 				IS.AddItem(itemName);
@@ -80,9 +76,7 @@ public class EventsSystem : MonoBehaviour
 				text = "A blue key, seems important.";
 				AbstractAdd();
 				text = "Obtained a <color=blue>blue key</color>.";
-				AbstractAdd();
-				WD.isTextEvent = true;
-				dialogBox.SetActive(true);
+				AbstractEnd();
 				itemName = "BlueKey";
 				IS.CheckPlace();
 				IS.AddItem(itemName);
@@ -103,5 +97,13 @@ public class EventsSystem : MonoBehaviour
 	{
 		WD.eventExt.Add(text);
 		text = null;
+	}
+
+	void AbstractEnd()
+    {
+		WD.eventExt.Add(text);
+		text = null;
+		WD.isTextEvent = true;
+		dialogBox.SetActive(true);
 	}
 }
