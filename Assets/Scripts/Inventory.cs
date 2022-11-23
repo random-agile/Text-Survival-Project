@@ -28,46 +28,38 @@ public class Inventory : MonoBehaviour
 		SetStats();
 	}
 	
-	void Update()
+	void Update() // update for input
 	{
 		if(Input.GetKeyUp(b))
 		{
 			if(!bagOpen && !TIM.isWriting && !TIM.menuOpen)
 			{
 				OpenBag();
-				//aS.clip = aC[0];
-				//aS.Play();
 				bagOpen = true;
 			}
 			else if(bagOpen && !TIM.isWriting && !TIM.menuOpen)
 			{
 				CloseBag();
 				bagOpen = false;
-				//aS.clip = aC[0];
-				//aS.Play();
 			}
 		}
 	}
 	
-	public void ButtonOpenBag()
+	public void ButtonOpenBag() // function to assign onClick() to check the bag
 	{
 		if(!bagOpen && !TIM.isWriting && !TIM.menuOpen)
 			{
 				OpenBag();
-				//aS.clip = aC[0];
-				//aS.Play();
 				bagOpen = true;
 			}
 		else if(bagOpen && !TIM.isWriting && !TIM.menuOpen)
 			{
 				CloseBag();
 				bagOpen = false;
-				//aS.clip = aC[0];
-				//aS.Play();
 			}	
 	}
 	
-	void SetStats()
+	void SetStats() // set all stats of the player
 	{
 		statsText[0].text = "Health  " + PS.hp.ToString();
 		statsText[1].text = "Stress   " + PS.stress.ToString();
@@ -75,7 +67,6 @@ public class Inventory : MonoBehaviour
 		statsText[3].text = "Conviction  " + PS.conviction.ToString();
 		statsText[4].text = "Dexterity    " + PS.dexterity.ToString();
 	}
-	
 	
 	void OpenBag()
 	{
@@ -87,13 +78,13 @@ public class Inventory : MonoBehaviour
 		bag.SetActive(false);		
 	}
 	
-	public void PrepLoad()
+	public void PrepLoad() // function to assign onClick() to leave the inventory
 	{
 		fade.SetActive(true);
 		StartCoroutine(Load());
 	}
 	
-	IEnumerator Load()
+	IEnumerator Load() // destroy clone
 	{
 		yield return new WaitForSeconds(1f);
 		PI.isMenu = true;

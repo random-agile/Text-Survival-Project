@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class WriteDialog : MonoBehaviour
@@ -13,7 +12,6 @@ public class WriteDialog : MonoBehaviour
 	public KeyCode enter = KeyCode.Return;
 	public string originalText;
 	public TMP_Text uiText;
-	int textState;
 	
 	public List <string> eventExt;
 	public List <string> nothingExt;
@@ -23,9 +21,7 @@ public class WriteDialog : MonoBehaviour
 	bool updateSecurity;
 	
 	public List <GameObject> menu;
-	
-	public GameObject actualEvent;
-	
+	public GameObject actualEvent;	
 	EventsSystem ES;
 	
 	void Awake()
@@ -125,5 +121,4 @@ public class WriteDialog : MonoBehaviour
 		}
 		endBox.SetActive(true);
 	}	
-
 }

@@ -15,40 +15,40 @@ public class MinerManager : MonoBehaviour
 	public Transform pos;
 	public Animator anims;
 	
-	
 	void Start()
 	{
 		originalSprite.sprite = idleList[0];
 	}
-    
-	void Update()
+   
+	void Update() // every 20 frame change sprite + sprite look at the player every frames
 	{
 		wait++;
 		if(wait == 20){ChangingState(); wait = 0;}
 		transform.LookAt(2 * transform.position - pos.position);
-		
-	}
-	
-	void ChangingState()
+	}	
+
+	void ChangingState() // control state of the animation with the variable "state"
 	{
-		if(state == 0)
-		{
-			IdleSprite();
-		}
-		else if(state == 1)
-		{
-			AttackSprite();
-		}
-		else if (state == 2)
-		{
-			HitSprite();
-		}
-		else if (state == 3)
-		{
-			DeathSprite();
+		switch(state)
+        {
+			case 0:
+				IdleSprite();
+				break;
+
+			case 1:
+				AttackSprite();
+				break;
+
+			case 2:
+				HitSprite();
+				break;
+
+			case 3:
+				DeathSprite();
+				break;
 		}
 	}
-	
+
 	void IdleSprite()
 	{
 		if(completed == 3)
@@ -61,8 +61,8 @@ public class MinerManager : MonoBehaviour
 			originalSprite.sprite = idleList[completed]; 
 			completed++;
 		}
-	}
-	
+	}	
+
 	void AttackSprite()
 	{
 		if(completed == 3)
@@ -79,7 +79,7 @@ public class MinerManager : MonoBehaviour
 	
 	void HitSprite()
 	{
-		if(completed == 2)
+		if(completed == 3)
 		{
 			originalSprite.sprite = hitList[completed]; 
 			completed = 0;

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 	public int playerMovement;
 	
 	Vector3 targetGridPos;
-	Vector3 prevTargetGridPos;
+	//Vector3 prevTargetGridPos;
 	Vector3 targetRotation;
 	
 	public bool asMoved;
@@ -31,7 +31,6 @@ public class PlayerController : MonoBehaviour
 	bool isWallBack;
 	bool isMonsterBack;
 	
-	
 	private void Start()
 	{
 		Application.targetFrameRate = 60;
@@ -39,7 +38,7 @@ public class PlayerController : MonoBehaviour
 		EM = this.GetComponent<EncounterManager>();		
 	}
 	
-	private void Encounter()
+	private void Encounter() // play heartbeat before encounter
 	{
 		if(!encounterSecurity)
 		{
@@ -50,19 +49,17 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 	
-	private void FixedUpdate()
+	private void FixedUpdate() // raycast checking position front and back
 	{				
 		if (Physics.Raycast(transform.position, transform.forward, out hitMonsterFront, 20) && hitMonsterFront.transform.tag == "Creature")
 		{	
 			if(!isWallFront)
 			{
-			//Debug.Log("Did Hit Front");
 			Encounter();							
 			}						
 		}
 		else
 		{
-			//Debug.Log("Stop Hit Front");
 			encounterSecurity = false;
 		}
 		
@@ -70,35 +67,29 @@ public class PlayerController : MonoBehaviour
 		{	
 			if(!isWallBack)
 			{
-				//Debug.Log("Did Hit Back");
 				isMonsterBack = true;							
 			}						
 		}
 		else
 		{
-			//Debug.Log("Stop Hit Back");
 			isMonsterBack = false;
 		}
 		
 		if (Physics.Raycast(transform.position, transform.forward, out hitWallFront, 15) && hitWallFront.transform.tag == "Wall")
 		{
-			//Debug.Log("Did Hit Wall Front");
 			isWallFront = true;	
 		}
 		else 
 		{
-			//Debug.Log("Stop Wall Front");
 			isWallFront = false;
 		}
 		
 		if (Physics.Raycast(transform.position, transform.forward * -1, out hitWallBack, 15) && hitWallBack.transform.tag == "Wall")
 		{
-			//Debug.Log("Did Hit Wall Back");
 			isWallBack = true;	
 		}
 		else 
 		{
-			//Debug.Log("Stop Wall Back");
 			isWallBack = false;
 		}
 		
@@ -109,11 +100,11 @@ public class PlayerController : MonoBehaviour
 	}	
 			
 			
-	void MovePlayer()
+	void MovePlayer() // move up, down, left, right the player
 	{
 		if (true)
 		{
-			prevTargetGridPos = targetGridPos;
+			//prevTargetGridPos = targetGridPos;
 			
 			Vector3 targetPosition = targetGridPos;
 			

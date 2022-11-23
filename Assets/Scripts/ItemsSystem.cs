@@ -5,16 +5,17 @@ using UnityEngine.UI;
 
 public class ItemsSystem : MonoBehaviour
 {
-	public List <Sprite> itemsContainer;
-	public List <Image> itemsMenu;
+	[Header("Items Infos and Lists")]
 	public Sprite newItem;
+	public List <Sprite> itemsContainer;
+	public List <Image> itemsMenu;	
+	public List <bool> isPlace;
+	public List <string> itemName;
 	int itemsNb;
 	int itemUsed;
 	string itemStock;
-	public List <bool> isPlace;
-	public List <string> itemName;
-	
-	public void AddItem(string item)
+
+	public void AddItem(string item) // Add Item to the inventory depending on name
 	{
 		itemStock = item;
 
@@ -30,16 +31,8 @@ public class ItemsSystem : MonoBehaviour
 			break;
 		}
 	}
-
-	void AddItemAbstract()
-    {
-		itemsMenu[itemsNb].sprite = newItem;
-		itemsMenu[itemsNb].GetComponent<Image>().SetNativeSize();
-		itemName[itemsNb] = itemStock;
-	}
 	
-	
-	void UseItem()
+	void UseItem() // Use item in menu
 	{
 		switch(itemName[itemUsed])
 		{
@@ -51,9 +44,8 @@ public class ItemsSystem : MonoBehaviour
 			break;
 		}
 	}
-	
 		
-	public void CheckPlace()
+	public void CheckPlace() // Check where the next item will be stored and tell if the maximum capacity as been reached
 	{
 		for(int i = 0; i < 8; i++)
 		{
@@ -74,9 +66,8 @@ public class ItemsSystem : MonoBehaviour
 				Debug.Log("c'est plein");
 			}			
 		}
-	}
-	
-	public void ItemOneUse()
+	}	
+	public void ItemOneUse() // public function to use when pressing the corresponding button
 	{	
 		itemUsed = 0;
 		itemsMenu[0].sprite = itemsContainer[0];
@@ -139,6 +130,14 @@ public class ItemsSystem : MonoBehaviour
 		UseItem();
 		itemName[7] = null;
 	}
-	
+
+	// Different functions below for abstracting some lines of code
+	void AddItemAbstract()
+	{
+		itemsMenu[itemsNb].sprite = newItem;
+		itemsMenu[itemsNb].GetComponent<Image>().SetNativeSize();
+		itemName[itemsNb] = itemStock;
+	}
+
 }
 

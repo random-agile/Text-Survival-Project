@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class MouseEraser : MonoBehaviour
@@ -17,9 +15,6 @@ public class MouseEraser : MonoBehaviour
 	public AudioClip aC;
 	public AudioClip aD;
 	public bool countLock;
-	
-	int xspot;
-	int yspot;
 	Vector2 hotSpot;
 	
 	void Start()
@@ -30,9 +25,8 @@ public class MouseEraser : MonoBehaviour
 		countText.text = eraseCount.ToString();
 	}
 	
-	public void GetEraser()
-	{
-		
+	public void GetEraser() // get eraser in hand OnClick()
+	{	
 		if(!isGommed && eraseCount > 0)
 		{
 			aS.clip = aC;
@@ -49,7 +43,7 @@ public class MouseEraser : MonoBehaviour
 		}
 	}
 	
-	public void EraseText()
+	public void EraseText() // erase the text
 	{
 		if(TIM.isFinished && eraseCount > 0 && isGommed)
 		{

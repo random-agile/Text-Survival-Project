@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -30,16 +29,14 @@ public class TextInputManager : MonoBehaviour
 	
 	public MMFeedbacks checkFeed;
 	public MMFeedbacks countFeed;
-	
-	int xspot;
-	int yspot;
+
 	Vector2 hotSpot;
 	
 	public bool menuOpen;
 	int bookWords;
 	public List<TextMeshProUGUI> bookTexts;
 	public List<string> foundWords;
-	private KeyCode a = KeyCode.Space;
+	private KeyCode Space = KeyCode.Joystick1Button0;
 	
 	public GameObject book;
 	public TextMeshProUGUI countTextWord;
@@ -57,8 +54,7 @@ public class TextInputManager : MonoBehaviour
 		int yspot = cursorTexture[0].height/2;
 		Vector2 hotSpot = new Vector2(xspot,yspot);
 		Cursor.SetCursor(cursorTexture[0], hotSpot, CursorMode.Auto);
-		countText.text = writeCount.ToString();
-		
+		countText.text = writeCount.ToString();		
 		Load();
 	}	
 	
@@ -71,7 +67,7 @@ public class TextInputManager : MonoBehaviour
 			isZero = false;
 		}
 		
-		if(Input.GetKeyUp(a))
+		if(Input.GetKeyUp(Space))
 		{
 			if(!menuOpen && !isWriting && !I.bagOpen)
 			{
@@ -87,7 +83,7 @@ public class TextInputManager : MonoBehaviour
 				aS.clip = aC[9];
 				aS.Play();
 			}
-		}
+		}	
 	}
 	
 	void OnMouseEnter()
@@ -147,47 +143,41 @@ public class TextInputManager : MonoBehaviour
 		isFinished = true;
 		eraseButton.SetActive(true);
 		
-		if(theText == "Disgaea Horny" && !foundWords.Contains("Disgaea Horny"))
+		if(theText == "aeiou" && !foundWords.Contains("aeiou"))
 		{
-			textMesh.color = Color.blue;
-			aS.clip = aC[5];
-			aS.Play();
-			checkFeed.PlayFeedbacks();
+			textMesh.color = Color.blue;			
 			AddWord();			
 		}
 		
-		if(theText == "lighter" && !foundCommands.Contains("lighter"))
+		if(theText == "lighter" && !foundWords.Contains("lighter"))
 		{
 			textMesh.color = Color.red;
-			aS.clip = aC[5];
-			aS.Play();
-			checkFeed.PlayFeedbacks();
 			AddWord();
 		}
 		
 		if(theText == "Talk" && !foundCommands.Contains("Talk"))
 		{
-			AbstractAddCommand();
+			AddCommand();
 		}
 		
 		if(theText == "Look" && !foundCommands.Contains("Look"))
 		{
-			AbstractAddCommand();
+			AddCommand();
 		}
 		
 		if(theText == "Smell" && !foundCommands.Contains("Smell"))
 		{
-			AbstractAddCommand();
+			AddCommand();
 		}
 		
 		if(theText == "Listen" && !foundCommands.Contains("Listen"))
 		{
-			AbstractAddCommand();
+			AddCommand();
 		}
 		
 		if(theText == "Touch" && !foundCommands.Contains("Touch"))
 		{
-			AbstractAddCommand();
+			AddCommand();
 		}
 		
 		if(theText.Length == 0)
@@ -196,23 +186,8 @@ public class TextInputManager : MonoBehaviour
 			isWriting = false;
 			isFinished = false;
 			eraseButton.SetActive(false);
-		}
-		
+		}	
 		endButton.Select();
-	}
-	
-	void AbstractAddCommand()
-	{
-		textMesh.color = Color.yellow;
-		aS.clip = aC[5];
-		aS.Play();
-		checkFeed.PlayFeedbacks();
-		AddCommand();
-	}
-	
-	void AbstractAddWord()
-	{
-		
 	}
 	
 	public void ScribbleSound()
@@ -246,10 +221,8 @@ public class TextInputManager : MonoBehaviour
 				writeCount --;
 				countFeed.PlayFeedbacks();
 			}
-		}
-		
-		countText.text = writeCount.ToString();
-		
+		}	
+		countText.text = writeCount.ToString();		
 	}
  
 	void DisableKey( KeyCode key )
@@ -308,8 +281,7 @@ public class TextInputManager : MonoBehaviour
 	void CloseBook()
 	{
 		book.SetActive(false);
-		boxCol.enabled = true;
-		
+		boxCol.enabled = true;		
 	}
 	
 	public void ButtonBook()
@@ -329,9 +301,12 @@ public class TextInputManager : MonoBehaviour
 				aS.Play();
 			}
 	}
-	
+
 	void AddWord()
 	{
+		aS.clip = aC[5];
+		aS.Play();
+		checkFeed.PlayFeedbacks();
 		bookTexts[bookWords].text = theText;
 		bookTexts[bookWords].color = textMesh.color;
 		bookWords++;
@@ -342,6 +317,10 @@ public class TextInputManager : MonoBehaviour
 	
 	void AddCommand()
 	{
+		textMesh.color = Color.yellow;
+		aS.clip = aC[5];
+		aS.Play();
+		checkFeed.PlayFeedbacks();
 		actionCommand[commandFound].text = theText;
 		actionCommand[commandFound].color = textMesh.color;
 		commandFound++;
@@ -389,6 +368,5 @@ public class TextInputManager : MonoBehaviour
 		{
 			actionCommand[i].text = foundCommands[i];
 		}
-	}
-	
+	}	
 }

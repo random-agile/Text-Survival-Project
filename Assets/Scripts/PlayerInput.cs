@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using System.IO;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(PlayerController))]
 public class PlayerInput : MonoBehaviour
 {
+	[Header("Inputs Key")]
 	public KeyCode forward = KeyCode.UpArrow;
 	public KeyCode backward = KeyCode.DownArrow;
 	public KeyCode turnLeft = KeyCode.LeftArrow;
 	public KeyCode turnRight = KeyCode.RightArrow;
-	public KeyCode items = KeyCode.A;
-	
+	public KeyCode items = KeyCode.F2;
+
+	[Header("References")]
 	public AudioSource aS;
 	public List <AudioClip> aC;
 	public GameObject fadeOut;
@@ -22,7 +22,6 @@ public class PlayerInput : MonoBehaviour
 	public bool isMovementLocked;
 	public bool isMenu;
 	public bool isItemMenu;
-	ItemsSystem IS;
 	public GameObject HUD;
 	public GameObject ItemHUD;
 	public GameObject ItemSelect;
@@ -32,10 +31,9 @@ public class PlayerInput : MonoBehaviour
 	private void Awake()
 	{
 	    controller = GetComponent<PlayerController>();
-	    IS = this.GetComponent<ItemsSystem>();
     }
 
-	private void Update()
+	private void Update() // input taken at every frame
 	{
 		if(!isMovementLocked)
 		{
@@ -61,11 +59,10 @@ public class PlayerInput : MonoBehaviour
 		{
 			ExitMenu();
 			isMenu = false;
-		}
-		
+		}		
 	}
     
-	public void OpenItems()
+	public void OpenItems() // open item menu
 	{
 		aS.clip = aC[0];
 		aS.Play();
@@ -76,7 +73,7 @@ public class PlayerInput : MonoBehaviour
 		EventSystem.current.SetSelectedGameObject(ItemSelect);
 	}
 	
-	public void CloseItems()
+	public void CloseItems() // close item menu
 	{
 		aS.clip = aC[1];
 		aS.Play();
@@ -96,34 +93,23 @@ public class PlayerInput : MonoBehaviour
 		enabled = false;
 	}
 	
-	public void Loaded()
+	public void Loaded() // function to attribute on click for loading writing menu
 	{
 		fadeOut.SetActive(true);
 		StartCoroutine(Loadings());
 	}	
 	
-	IEnumerator Loadings()
+	IEnumerator Loadings() // launch writing menu
 	{
-		/*PosData data = new PosData();
-		
-		data.playerPos = this.gameObject.transform.position;
-		data.playerRot = this.gameObject.transform.rotation;
-		data.playerScale = this.gameObject.transform.localScale;
-		
-		string json = JsonUtility.ToJson(data, true);
-		File.WriteAllText(Application.dataPath + "/PosFile.json", json);
-		*/
 		isMovementLocked = true;
 		yield return new WaitForSeconds(1f);
 		fadeOut.SetActive(false);
 		foreach (var obj in transitionObjects)
-			obj.SetActive(false);
+		obj.SetActive(false);
 		Instantiate(menu);
-		
-		//SceneManager.LoadScene("Assets/Scenes/Experimental Chaos.unity");		
 	}
 	
-	public void ExitMenu()
+	public void ExitMenu() // exit writing menu
 	{
 		foreach (var obj in transitionObjects)
 			obj.SetActive(true);

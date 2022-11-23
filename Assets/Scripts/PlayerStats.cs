@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
+	[Header("Stats")]
 	public int hp = 100;
 	public int hpMax = 100;
 	public int stress = 0;
@@ -15,36 +13,19 @@ public class PlayerStats : MonoBehaviour
 	public int will = 1;
 	public int conviction = 1;
 	public int dexterity = 1;
-	public Vector3 pos;
-	public Quaternion rot;
-	public Vector3 scale;
-	
+
+	[Header("Texts")]
 	public TMP_Text hpText;
 	public TMP_Text spText;
-	
+
+	[Header("Sliders")]
 	public Slider hpSlider;
 	public Slider spSlider;
 	
-	void Awake()
+	void Awake() // assign value to slider
 	{
 		hpText.text = hpSlider.value.ToString();
 		spText.text = spSlider.value.ToString();
-	}
-	
-	/*void Awake()
-	{		
-		string json = File.ReadAllText(Application.dataPath + "/PosFile.json");
-		PosData data = JsonUtility.FromJson<PosData>(json);
-		
-		pos = data.playerPos;
-		rot = data.playerRot;
-		scale = data.playerScale;
-		
-		this.gameObject.transform.position = pos;
-		this.gameObject.transform.rotation = rot;
-		this.gameObject.transform.localScale = scale;
-	}
-	*/
-	
+	}	
 }
 
