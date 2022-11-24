@@ -7,6 +7,8 @@ public class WriteDialog : MonoBehaviour
 {
 	public AudioSource audioSrc;
 	public AudioClip turningPage;
+	public AudioClip doorLocked;
+	public AudioClip mystery;
 	public GameObject itemBox;
 	public GameObject endBox;
 	public KeyCode enter = KeyCode.Return;
@@ -59,7 +61,9 @@ public class WriteDialog : MonoBehaviour
 				AbstractNext();
 				originalText = eventExt[loopControl];
 				AbstractNextFollow();
-				ShowColorText();		
+				ShowColorText();
+				audioSrc.clip = mystery;
+				audioSrc.Play();
 			}
 			
 			if(loopControl <= eventExt.Count -1)
@@ -89,8 +93,17 @@ public class WriteDialog : MonoBehaviour
 	void AbstractStart()
 	{
 		updateSecurity = true;
-		audioSrc.clip = turningPage;
-		audioSrc.Play();
+		if(!ES.isDoor)
+		{
+			audioSrc.clip = turningPage;
+			audioSrc.Play();
+		}
+		else
+		{
+			audioSrc.clip = doorLocked;
+			audioSrc.Play();
+		}
+		
 		foreach (var obj in menu)
 		{
 			obj.SetActive(false);
@@ -100,15 +113,16 @@ public class WriteDialog : MonoBehaviour
 	void AbstractNext()
 	{
 		endBox.SetActive(false);
-		audioSrc.clip = turningPage;
-		audioSrc.Play();
 		uiText.text = null;
 	}
+
 	
 	void AbstractNextFollow()
 	{
 		uiText.text = null;
 		loopControl++;
+		audioSrc.clip = turningPage;
+		audioSrc.Play();
 	}
 	
 	void AbstractEnd()
@@ -118,6 +132,8 @@ public class WriteDialog : MonoBehaviour
 		itemBox.SetActive(false);
 		updateSecurity = false;
 		loopControl = 1;
+		ES.isDoor = false;
+		audioSrc.clip = turningPage;
 		foreach (var obj in menu)
 		{
 			obj.SetActive(true);

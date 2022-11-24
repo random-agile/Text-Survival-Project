@@ -1,13 +1,11 @@
 {
-    "nbOfErase": 0,
-    "nbOfWrite": 10,
+    "nbOfSheet": 4,
+    "nbOfWrite": 17,
     "nbOfWords": 2,
-    "nbOfCommands": 1,
+    "nbOfCommands": 0,
     "allWordsFound": [
         "aeiou",
-        "a"
+        "lighter"
     ],
-    "allCommandsFound": [
-        "Smell"
-    ]
+    "allCommandsFound": []
 }

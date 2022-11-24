@@ -10738,6 +10738,7 @@ MonoBehaviour:
   - {fileID: 1081868503}
   - {fileID: 0}
   isOpen: 00000000000000000000
+  isDoor: 0
 --- !u!114 &864551458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13448,7 +13449,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347086065}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -8154, z: 0}
+  m_LocalPosition: {x: 0, y: -13000, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 864551450}
@@ -38080,7 +38081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5251575618127272907, guid: 925a91c4bdd90df46bd58f1220d20e08, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 925a91c4bdd90df46bd58f1220d20e08, type: 3}
@@ -49805,6 +49806,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSrc: {fileID: 224635822}
   turningPage: {fileID: 8300000, guid: 11e40620b43909648aa72837456062e6, type: 3}
+  doorLocked: {fileID: 8300000, guid: 690e8ef9ccdbc55448b871fd6532a481, type: 3}
+  mystery: {fileID: 8300000, guid: a3dc222bdfdf1a44ca6671257cd643df, type: 3}
   itemBox: {fileID: 4654460075139836381}
   endBox: {fileID: 169635204}
   enter: 13

@@ -22,6 +22,7 @@ public class EventsSystem : MonoBehaviour
 	public List<bool> isOpen;
 	string doorNumber;
 	int door;
+	public bool isDoor;
 
 	void Awake() //Get All Necessary Components
 	{
@@ -84,9 +85,18 @@ public class EventsSystem : MonoBehaviour
 				AbstractEndItem();
 				break;
 
-		case " 4":
+		case " 4":	
+			isDoor = true;
+			if(!isDoor)
+			{
 				CheckDoor();
-				break;
+			}
+			else
+			{				
+				text = "The door seems locked.";
+				AbstractEnd();
+			}
+			break;	
 		}
 	}
 	

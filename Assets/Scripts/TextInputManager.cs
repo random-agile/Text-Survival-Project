@@ -8,7 +8,7 @@ using System.IO;
 public class TextInputManager : MonoBehaviour
 {
 	Inventory I;
-	public MouseEraser ME;
+	//public MouseEraser ME;
 	public TMP_InputField inputField;
 	public string theText;
 	public GameObject select;
@@ -18,17 +18,20 @@ public class TextInputManager : MonoBehaviour
 	public int randomus;
 	public List <AudioClip> aC;
 	public int writeCount;
+	public int sheetCount;
 	public TextMeshProUGUI countText;
+	public TextMeshProUGUI sheetText;
 	public bool isFinished;
 	public string lastWord;
 	public bool isFirst;
-	public GameObject eraseButton;
+	//public GameObject eraseButton;
 	bool isZero;
 	public List<Texture2D> cursorTexture;
 	public BoxCollider2D boxCol;
 	
 	public MMFeedbacks checkFeed;
 	public MMFeedbacks countFeed;
+	public MMFeedbacks sheetFeed;
 
 	Vector2 hotSpot;
 	
@@ -54,7 +57,6 @@ public class TextInputManager : MonoBehaviour
 		int yspot = cursorTexture[0].height/2;
 		Vector2 hotSpot = new Vector2(xspot,yspot);
 		Cursor.SetCursor(cursorTexture[0], hotSpot, CursorMode.Auto);
-		countText.text = writeCount.ToString();		
 		Load();
 	}	
 	
@@ -97,7 +99,7 @@ public class TextInputManager : MonoBehaviour
 		if(!isFinished)
 		{
 			Cursor.SetCursor(cursorTexture[2], hotSpot, CursorMode.Auto);
-			ME.isGommed = false;
+			//ME.isGommed = false;
 		}
 	}
 	
@@ -129,10 +131,10 @@ public class TextInputManager : MonoBehaviour
 	void OnMouseExit()
 	{
 		select.SetActive(false);
-		if(!ME.isGommed)
-		{
-			Cursor.SetCursor(cursorTexture[0], hotSpot, CursorMode.Auto);
-		}
+		//if(!ME.isGommed)
+		//{
+		//	Cursor.SetCursor(cursorTexture[0], hotSpot, CursorMode.Auto);
+		//}
 	}
     
 	public void CheckTextInput()
@@ -141,7 +143,7 @@ public class TextInputManager : MonoBehaviour
 		inputField.interactable = false;
 		isWriting = false;
 		isFinished = true;
-		eraseButton.SetActive(true);
+		//eraseButton.SetActive(true);
 		
 		if(theText == "aeiou" && !foundWords.Contains("aeiou"))
 		{
@@ -185,9 +187,23 @@ public class TextInputManager : MonoBehaviour
 			inputField.interactable = true;
 			isWriting = false;
 			isFinished = false;
-			eraseButton.SetActive(false);
-		}	
-		endButton.Select();
+			//eraseButton.SetActive(false);
+		}
+		else
+		{
+			endButton.Select();
+			sheetCount--;
+			sheetText.text = "x" + sheetCount.ToString();
+			sheetFeed.PlayFeedbacks();
+			inputField.text = null;
+			theText = null;
+			inputField.interactable = true;
+			isWriting = false;
+			isFinished = false;
+			textMesh.color = Color.black;
+			aS.clip = aC[10];
+			aS.Play();
+		}		
 	}
 	
 	public void ScribbleSound()
@@ -209,19 +225,17 @@ public class TextInputManager : MonoBehaviour
 		{
 			isFirst = true;
 		}
-		else
+		else if(writeCount > 0)
 		{
-			if(ME.countLock)
-			{
-				ME.countLock = false;
-			}
-			else if(writeCount > 0)
-			{
-				playSound();
-				writeCount --;
-				countFeed.PlayFeedbacks();
-			}
-		}	
+			playSound();
+			writeCount --;
+			countFeed.PlayFeedbacks();
+		}
+			//if(ME.countLock)
+			//{
+			//	ME.countLock = false;
+			//}
+			
 		countText.text = writeCount.ToString();		
 	}
  
@@ -333,7 +347,7 @@ public class TextInputManager : MonoBehaviour
 		SaveData data = new SaveData();
 		
 		data.nbOfWrite = writeCount;
-		data.nbOfErase = ME.eraseCount;
+		data.nbOfSheet = sheetCount;
 		data.nbOfWords = bookWords;
 		data.allWordsFound = foundWords;
 		data.nbOfCommands = commandFound;
@@ -349,15 +363,20 @@ public class TextInputManager : MonoBehaviour
 		SaveData data = JsonUtility.FromJson<SaveData>(json);
 		
 		writeCount = data.nbOfWrite;
-		ME.eraseCount = data.nbOfErase;
+		sheetCount = data.nbOfSheet;
 		bookWords = data.nbOfWords;
 		commandFound = data.nbOfCommands;
 		foundWords = data.allWordsFound;
 		foundCommands = data.allCommandsFound;
 		
+		sheetText.text = "x" + sheetCount.ToString();
 		countText.text = writeCount.ToString();
 		countTextWord.text = bookWords.ToString();
-		ME.countText.text = ME.eraseCount.ToString();
+		Debug.Log(sheetText.text);
+		Debug.Log(countText.text);
+		Debug.Log(countTextWord.text);
+			
+		//ME.countText.text = ME.eraseCount.ToString();
 		
 		for (int i = 0; i < bookWords; i++)
 		{

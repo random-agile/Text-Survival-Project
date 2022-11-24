@@ -3,7 +3,7 @@
 [System.Serializable]
 public class SaveData
 {
-	public int nbOfErase;
+	public int nbOfSheet;
 	public int nbOfWrite;
 	public int nbOfWords;
 	public int nbOfCommands;
