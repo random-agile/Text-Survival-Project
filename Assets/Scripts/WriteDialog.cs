@@ -17,12 +17,15 @@ public class WriteDialog : MonoBehaviour
 	public List <string> nothingExt;
 	public bool isTextEvent;
 	public bool isNothing;
+	public bool isColor;
 	int loopControl =1;
 	bool updateSecurity;
 	
 	public List <GameObject> menu;
 	public GameObject actualEvent;	
 	EventsSystem ES;
+	
+	public float displaySpeed;
 	
 	void Awake()
 	{
@@ -48,7 +51,15 @@ public class WriteDialog : MonoBehaviour
 				isTextEvent = false;
 				eventExt.Clear();
 				actualEvent.SetActive(false);
-				ES.isEvent = 0;
+				ES.eventId = "0";
+			}
+			
+			if(loopControl == eventExt.Count -1 && isColor)
+			{
+				AbstractNext();
+				originalText = eventExt[loopControl];
+				AbstractNextFollow();
+				ShowColorText();		
 			}
 			
 			if(loopControl <= eventExt.Count -1)
@@ -56,7 +67,7 @@ public class WriteDialog : MonoBehaviour
 				AbstractNext();
 				originalText = eventExt[loopControl];
 				AbstractNextFollow();
-				StartCoroutine(ShowText());
+				StartCoroutine(ShowText());				
 			}
 		}
 		
@@ -102,6 +113,7 @@ public class WriteDialog : MonoBehaviour
 	
 	void AbstractEnd()
 	{
+		isColor = false;
 		endBox.SetActive(false);
 		itemBox.SetActive(false);
 		updateSecurity = false;
@@ -109,7 +121,7 @@ public class WriteDialog : MonoBehaviour
 		foreach (var obj in menu)
 		{
 			obj.SetActive(true);
-		}
+		}		
 	}
 
 	IEnumerator ShowText()
@@ -117,8 +129,14 @@ public class WriteDialog : MonoBehaviour
 		for (int i =0; i <= originalText.Length; i++)
 		{
 			uiText.text = originalText.Substring(0,i);
-			yield return new WaitForSeconds(0.005f);			
+			yield return new WaitForSeconds(displaySpeed);		
 		}
 		endBox.SetActive(true);
 	}	
+	
+	void ShowColorText()
+	{
+		uiText.text = originalText;
+		endBox.SetActive(true);
+	}
 }

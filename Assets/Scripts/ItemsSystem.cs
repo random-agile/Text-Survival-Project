@@ -21,11 +21,11 @@ public class ItemsSystem : MonoBehaviour
 
 		switch(item)
 		{
-		case "Allumette":
+		case "Allumette 1":
 			newItem = itemsContainer[1];
 			AddItemAbstract();
 			break;
-		case "BlueKey":
+		case "BlueKey 3":
 			newItem = itemsContainer[2];
 			AddItemAbstract();
 			break;
@@ -36,10 +36,10 @@ public class ItemsSystem : MonoBehaviour
 	{
 		switch(itemName[itemUsed])
 		{
-		case "Allumette":
+		case "Allumette 1":
 			Debug.Log("alum");
 			break;
-		case "BlueKey":
+		case "BlueKey 3":
 			Debug.Log("blue");
 			break;
 		}

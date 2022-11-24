@@ -95,8 +95,8 @@ public class PlayerController : MonoBehaviour
 		
 		MovePlayer();		
 		
-		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 15, Color.red);
-		Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward * -1) * 15, Color.blue);
+		Debug.DrawRay(transform.position, transform.forward * 15, Color.red);
+		Debug.DrawRay(transform.position, transform.forward * -1 * 15, Color.blue);
 	}	
 			
 			
