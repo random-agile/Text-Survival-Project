@@ -5,7 +5,7 @@ using TMPro;
 
 public class WriteDialog : MonoBehaviour
 {
-	public AudioSource audioSrc;
+	//public AudioSource audioSrc;
 	public AudioClip turningPage;
 	public AudioClip doorLocked;
 	public AudioClip mystery;
@@ -62,8 +62,8 @@ public class WriteDialog : MonoBehaviour
 				originalText = eventExt[loopControl];
 				AbstractNextFollow();
 				ShowColorText();
-				audioSrc.clip = mystery;
-				audioSrc.Play();
+				//audioSrc.clip = mystery;
+				//audioSrc.Play();
 			}
 			
 			if(loopControl <= eventExt.Count -1)
@@ -95,13 +95,13 @@ public class WriteDialog : MonoBehaviour
 		updateSecurity = true;
 		if(!ES.isDoor)
 		{
-			audioSrc.clip = turningPage;
-			audioSrc.Play();
+			//audioSrc.clip = turningPage;
+			//audioSrc.Play();
 		}
 		else
 		{
-			audioSrc.clip = doorLocked;
-			audioSrc.Play();
+			//audioSrc.clip = doorLocked;
+			//audioSrc.Play();
 		}
 		
 		foreach (var obj in menu)
@@ -121,8 +121,8 @@ public class WriteDialog : MonoBehaviour
 	{
 		uiText.text = null;
 		loopControl++;
-		audioSrc.clip = turningPage;
-		audioSrc.Play();
+		//audioSrc.clip = turningPage;
+		//audioSrc.Play();
 	}
 	
 	void AbstractEnd()
@@ -133,7 +133,7 @@ public class WriteDialog : MonoBehaviour
 		updateSecurity = false;
 		loopControl = 1;
 		ES.isDoor = false;
-		audioSrc.clip = turningPage;
+		//audioSrc.clip = turningPage;
 		foreach (var obj in menu)
 		{
 			obj.SetActive(true);

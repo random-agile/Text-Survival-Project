@@ -14,7 +14,7 @@ public class PlayerInput : MonoBehaviour
 	public KeyCode items = KeyCode.F2;
 
 	[Header("References")]
-	public AudioSource aS;
+	//public AudioSource aS;
 	public List <AudioClip> aC;
 	public GameObject fadeOut;
 	public List<GameObject> transitionObjects;
@@ -64,8 +64,8 @@ public class PlayerInput : MonoBehaviour
     
 	public void OpenItems() // open item menu
 	{
-		aS.clip = aC[0];
-		aS.Play();
+		//aS.clip = aC[0];
+		//aS.Play();
 		isMovementLocked = true;
 		isItemMenu = true;
 		HUD.SetActive(false);
@@ -75,8 +75,8 @@ public class PlayerInput : MonoBehaviour
 	
 	public void CloseItems() // close item menu
 	{
-		aS.clip = aC[1];
-		aS.Play();
+		//aS.clip = aC[1];
+		//aS.Play();
 		isMovementLocked = false;
 		isItemMenu = false;
 		HUD.SetActive(true);

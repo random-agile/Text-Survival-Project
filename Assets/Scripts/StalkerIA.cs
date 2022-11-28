@@ -70,8 +70,8 @@ public class StalkerIA : MonoBehaviour
 		if(!oneTrigger)
 		{
 			playerInput.DisableScript();
-			seSource.clip = seFoots;
-			seSource.Play();
+			//seSource.clip = seFoots;
+			//seSource.Play();
 			oneTrigger = true;
 		}
 	}

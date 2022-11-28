@@ -1,11 +1,9 @@
 {
-    "nbOfSheet": 4,
-    "nbOfWrite": 17,
-    "nbOfWords": 2,
+    "nbOfSheet": 5,
+    "nbOfWrite": 30,
+    "nbOfWords": 0,
     "nbOfCommands": 0,
     "allWordsFound": [
-        "aeiou",
-        "lighter"
     ],
     "allCommandsFound": []
 }

@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 	private void Start()
 	{
 		Application.targetFrameRate = 60;
+		QualitySettings.vSyncCount = 1;
 		targetGridPos = Vector3Int.RoundToInt(transform.position);
 		EM = this.GetComponent<EncounterManager>();		
 	}
