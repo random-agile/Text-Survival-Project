@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{5307280e-b755-4a0f-82f0-c1ac6a4c51e5}">
+		<property name="name">
+			<value>Rng</value>
+		</property>
+		<relationship name="folder">
+			<destination>{6af19446-12f0-4310-b3ea-8ea6858170e6}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{3e3fcc76-aab0-43c6-9161-b70c2dea7e26}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{3e3fcc76-aab0-43c6-9161-b70c2dea7e26}">
+		<property name="maximum">
+			<value>9</value>
+		</property>
+		<property name="initialValue">
+			<value>1</value>
+		</property>
+		<property name="seekSpeedAsymmetric">
+			<value>true</value>
+		</property>
+	</object>
+</objects>
