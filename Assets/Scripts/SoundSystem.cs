@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundSystem : MonoBehaviour
 {
-	private FMOD.Studio.EventInstance instance;
+	public FMOD.Studio.EventInstance instance;
 	public List<FMODUnity.EventReference> fmodEvent;
 	public void PlaySE(string name)
 	{
@@ -39,7 +39,7 @@ public class SoundSystem : MonoBehaviour
 		switch (name)
 		{
 			case "MusicStress":
-				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[1]);
+				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[0]);
 				instance.start();
 
 				break;
