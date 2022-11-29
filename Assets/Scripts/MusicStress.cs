@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,7 +20,6 @@ public class MusicStress : MonoBehaviour
         instance.start();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (PS.stress >= 75) {

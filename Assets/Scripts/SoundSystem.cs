@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,7 @@ public class SoundSystem : MonoBehaviour
 {
 	public FMOD.Studio.EventInstance instance;
 	public List<FMODUnity.EventReference> fmodEvent;
+	
 	public void PlaySE(string name)
 	{
 		switch (name)
@@ -52,5 +53,5 @@ public class SoundSystem : MonoBehaviour
 
 
 
-	// résultat final dans les autres scripts : SoundSystem.PlaySE(surmulot);
+	// rï¿½sultat final dans les autres scripts : SS.PlaySE(surmulot);
 }

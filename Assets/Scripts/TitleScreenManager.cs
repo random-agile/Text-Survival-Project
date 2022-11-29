@@ -12,13 +12,10 @@ public class TitleScreenManager : MonoBehaviour
 	public MMFeedbacks flash;
 	
 	public GameObject loadingScreen;
+	public GameObject loadingBarItem;
 	public Slider loadingBar;
 	
 	bool isFirst;
-	
-	void Awake()
-	{
-	}
 	
 	public void LoadScene(int sceneId)
 	{
@@ -51,8 +48,11 @@ public class TitleScreenManager : MonoBehaviour
 	{
 		yield return new WaitForSeconds(2f);
 		
-		AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
 		loadingScreen.SetActive(true);
+		
+		yield return new WaitForSeconds(8f);
+		loadingBarItem.SetActive(true);
+		AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
 		
 		while(!operation.isDone)
 		{

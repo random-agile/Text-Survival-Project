@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ public class SoundEvent : MonoBehaviour
 {
     public SoundSystem SS;
     public PlayerStats PS;
-    // Start is called before the first frame update
+
     void Awake()
     {
         SS = gameObject.GetComponent<SoundSystem>();
@@ -18,7 +18,6 @@ public class SoundEvent : MonoBehaviour
         SS.PlayBGS("MusicStress");    
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (PS.stress >= 75)

@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 	Vector3 targetGridPos;
 	//Vector3 prevTargetGridPos;
 	Vector3 targetRotation;
+	Vector3 actualRotation;
 	
 	public bool asMoved;
 	public bool encounterSecurity;
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
 	bool isWallFront;
 	bool isWallBack;
 	bool isMonsterBack;
+	
+	public GameObject hud;
 	
 	private void Start()
 	{
@@ -96,7 +99,15 @@ public class PlayerController : MonoBehaviour
 		if(transform.position == targetGridPos)
 		{
 			asMoved = false;
+			hud.SetActive(true);
 		}
+		
+		if(transform.eulerAngles != targetRotation)
+		{
+			asMoved = true;
+			hud.SetActive(false);
+		}
+		
 		
 		Debug.DrawRay(transform.position, transform.forward * 15, Color.red);
 		Debug.DrawRay(transform.position, transform.forward * -1 * 15, Color.blue);
@@ -142,6 +153,7 @@ public class PlayerController : MonoBehaviour
 		{
 			targetRotation -= Vector3.up * 90f;
 			asMoved = true;
+			hud.SetActive(false);
 		}
 	}
 	
@@ -151,6 +163,7 @@ public class PlayerController : MonoBehaviour
 		{
 			targetRotation += Vector3.up * 90f; 
 			asMoved = true;
+			hud.SetActive(false);
 		}
 	}
 	
@@ -160,6 +173,7 @@ public class PlayerController : MonoBehaviour
 		{
 			targetGridPos += transform.forward * playerMovement; 
 			asMoved = true;
+			hud.SetActive(false);
 		}
 	}
 	
@@ -169,6 +183,7 @@ public class PlayerController : MonoBehaviour
 		{
 			targetGridPos -= transform.forward * playerMovement; 
 			asMoved = true;
+			hud.SetActive(false);
 		}
 	}
 	

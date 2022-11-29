@@ -10519,6 +10519,7 @@ MonoBehaviour:
   asMoved: 0
   encounterSecurity: 0
   FlashFeedback: {fileID: 1993839986}
+  hud: {fileID: 967782332}
 --- !u!54 &864551453
 Rigidbody:
   m_ObjectHideFlags: 0
