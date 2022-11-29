@@ -20,9 +20,6 @@ public class PlayerController : MonoBehaviour
 	public MMFeedbacks FlashFeedback;
 	EncounterManager EM;
 	
-	public AudioSource seSource;
-	public AudioClip heartBeat;
-	
 	RaycastHit hitMonsterFront;
 	RaycastHit hitMonsterBack;
 	RaycastHit hitWallFront;
@@ -43,8 +40,8 @@ public class PlayerController : MonoBehaviour
 	{
 		if(!encounterSecurity)
 		{
-			seSource.clip = heartBeat;
-			seSource.Play();
+			//seSource.clip = heartBeat;
+			//seSource.Play();
 			encounterSecurity = true;
 			EM.Engage();
 		}
@@ -94,7 +91,12 @@ public class PlayerController : MonoBehaviour
 			isWallBack = false;
 		}
 		
-		MovePlayer();		
+		MovePlayer();	
+		
+		if(transform.position == targetGridPos)
+		{
+			asMoved = false;
+		}
 		
 		Debug.DrawRay(transform.position, transform.forward * 15, Color.red);
 		Debug.DrawRay(transform.position, transform.forward * -1 * 15, Color.blue);
@@ -106,11 +108,16 @@ public class PlayerController : MonoBehaviour
 		if (true)
 		{
 			//prevTargetGridPos = targetGridPos;
-			
 			Vector3 targetPosition = targetGridPos;
 			
-			if (targetRotation.y > 270f && targetRotation.y < 361f) targetRotation.y = 0f;
-			if (targetRotation.y < 0f) targetRotation.y = 270f;
+			if (targetRotation.y > 270f && targetRotation.y < 361f) 
+			{
+				targetRotation.y = 0f;
+			}
+			if (targetRotation.y < 0f) 
+			{
+				targetRotation.y = 270f;
+			}
 			
 			if(!smoothTransition)
 			{
@@ -133,7 +140,8 @@ public class PlayerController : MonoBehaviour
 	{ 
 		if(AtRest) 
 		{
-			targetRotation -= Vector3.up * 90f; 
+			targetRotation -= Vector3.up * 90f;
+			asMoved = true;
 		}
 	}
 	
@@ -142,6 +150,7 @@ public class PlayerController : MonoBehaviour
 		if(AtRest)
 		{
 			targetRotation += Vector3.up * 90f; 
+			asMoved = true;
 		}
 	}
 	
@@ -172,4 +181,5 @@ public class PlayerController : MonoBehaviour
 				return false;
 		}
 	}
+
 }

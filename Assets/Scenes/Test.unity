@@ -10519,8 +10519,6 @@ MonoBehaviour:
   asMoved: 0
   encounterSecurity: 0
   FlashFeedback: {fileID: 1993839986}
-  seSource: {fileID: 0}
-  heartBeat: {fileID: 8300000, guid: 32d7e5b436e1f574bb36b7ca81fabbd3, type: 3}
 --- !u!54 &864551453
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13099,7 +13097,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1337390919}
   - component: {fileID: 1337390923}
-  - component: {fileID: 1337390922}
   - component: {fileID: 1337390921}
   - component: {fileID: 1337390920}
   - component: {fileID: 1337390924}
@@ -13172,24 +13169,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.217882, y: 3.7236724, z: 6.691087}
   m_Center: {x: -0.5585419, y: 0.82103115, z: -0.9434398}
---- !u!114 &1337390922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1337390918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 500e712dc071de04984564d118007f70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  seSource: {fileID: 0}
-  seFoots: {fileID: 8300000, guid: 44a64c4060d338243a7ac5442d384868, type: 3}
-  stalkerState: 0
-  wait: 0
-  menu:
-  - {fileID: 967782332}
 --- !u!212 &1337390923
 SpriteRenderer:
   m_ObjectHideFlags: 0
