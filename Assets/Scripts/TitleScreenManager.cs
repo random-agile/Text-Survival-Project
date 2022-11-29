@@ -17,8 +17,8 @@ public class TitleScreenManager : MonoBehaviour
 	public void Select() // Select Menu Option
 	{
 		flash.PlayFeedbacks();
-		seAudio.clip = seClip[1];
-		seAudio.Play();
+		//seAudio.clip = seClip[1];
+		//seAudio.Play();
 		fade.SetActive(true);
 		foreach (GameObject obj in deactivate)
 		{
@@ -35,13 +35,13 @@ public class TitleScreenManager : MonoBehaviour
 		}
 		else if(isFirst)
 		{
-		seAudio.clip = seClip[0];
-			seAudio.Play();
+			//seAudio.clip = seClip[0];
+			//seAudio.Play();
 		}
 	}	
 	IEnumerator Load() // load begin scene
 	{
-		yield return new WaitForSeconds(4f);
+		yield return new WaitForSeconds(2f);
 		SceneManager.LoadScene("Assets/Scenes/Test.unity");
 	}
 }
