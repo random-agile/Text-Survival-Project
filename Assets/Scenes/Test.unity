@@ -10432,15 +10432,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 864551450}
-  - component: {fileID: 864551454}
   - component: {fileID: 864551453}
+  - component: {fileID: 864551454}
+  - component: {fileID: 864551459}
   - component: {fileID: 864551452}
   - component: {fileID: 864551451}
   - component: {fileID: 864551455}
   - component: {fileID: 864551456}
   - component: {fileID: 864551457}
   - component: {fileID: 864551458}
-  - component: {fileID: 864551459}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -18888,6 +18888,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1648165857}
   - component: {fileID: 1648165858}
+  - component: {fileID: 1648165859}
   m_Layer: 0
   m_Name: SoundSystem
   m_TagString: Untagged
@@ -18928,6 +18929,27 @@ MonoBehaviour:
       Data3: -1099558468
       Data4: -1971100674
     Path: event:/MusicStress
+  - Guid:
+      Data1: -979050587
+      Data2: 1147912913
+      Data3: -2020677477
+      Data4: 952342473
+    Path: event:/StepEvent
+--- !u!114 &1648165859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648165856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1ee2235ee809df45856f079dc870b87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SS: {fileID: 0}
+  PS: {fileID: 0}
+  PC: {fileID: 0}
 --- !u!1 &1679251647
 GameObject:
   m_ObjectHideFlags: 0
@@ -19341,7 +19363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1808823971
 MonoBehaviour:
   m_ObjectHideFlags: 0

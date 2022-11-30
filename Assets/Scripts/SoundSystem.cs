@@ -13,6 +13,8 @@ public class SoundSystem : MonoBehaviour
 		{
 			case "StepEvent":
 				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[1]);
+				instance.start();
+				instance.release();
 				break;
 
 			case "etc...":

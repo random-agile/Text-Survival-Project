@@ -32,19 +32,17 @@ public class SoundEvent : MonoBehaviour
         else SS.instance.setParameterByName("Rng", 0);
 
 
-        if (PC.asMoved)
-            if (!asPlayStepSound)
-            {
-                SS.PlaySE("StepEvent");
-                SS.instance.start();
-                asPlayStepSound = true;
-            }
-            else
-            {
-                SS.instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-                asPlayStepSound = false;
-            }
-           
+	    if (PC.asMoved && !asPlayStepSound)
+	    {
+	    	SS.PlaySE("StepEvent");
+	    	asPlayStepSound = true;
+	    }
+        
+	    if(!PC.asMoved)
+	    {
+	    	asPlayStepSound = false;
+	    	SS.instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+	    }
     }
   
 
