@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
-	<object class="AudioFile" id="{b5cf1951-ebfa-4c52-8a0f-758b7df07557}">
+	<object class="AudioFile" id="{fc8793a4-e538-4b93-a13d-c1559bd3e101}">
 		<property name="assetPath">
-			<value>Choirs - stem-glued.wav</value>
-		</property>
-		<property name="isStreaming">
-			<value>true</value>
+			<value>footstepsTwo.wav</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>44.0999985</value>
+			<value>48</value>
 		</property>
 		<property name="channelCount">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<property name="length">
-			<value>16</value>
+			<value>2.5012916666666665</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{c21fc794-1247-4984-8500-ab317f5178f8}</destination>
