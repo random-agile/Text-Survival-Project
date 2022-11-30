@@ -11,8 +11,8 @@ public class SoundSystem : MonoBehaviour
 	{
 		switch (name)
 		{
-			case "bruits de pas":
-
+			case "StepEvent":
+				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[1]);
 				break;
 
 			case "etc...":
@@ -20,6 +20,7 @@ public class SoundSystem : MonoBehaviour
 				break;
 		}
 	}
+	
 
 	public void PlayBGM(string name)
 	{
