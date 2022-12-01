@@ -7,6 +7,7 @@ public class SoundEvent : MonoBehaviour
     public SoundSystem SS;
     public PlayerStats PS;
     public PlayerController PC;
+    int rng = 0;
     bool asPlayStepSound;
 
     void Awake()
@@ -46,10 +47,8 @@ public class SoundEvent : MonoBehaviour
     }
   
 
-    IEnumerator StepEvent()
+    void RandomPenScratch()
     {
-        PC.asMoved = false;
-        SS.PlaySE("StepEvent");
-        yield return new WaitForSeconds(2.0f);
+        rng = Random.Range(0,4);
     }
 }

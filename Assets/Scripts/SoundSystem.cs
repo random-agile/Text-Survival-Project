@@ -2,6 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *		FmodEvent list:
+ *		
+ *		0	MusicStress
+ *		1	StepEvent
+ *		2	PenScratching
+ *		3
+ *		4
+ *
+ * 
+ */
+
+
 public class SoundSystem : MonoBehaviour
 {
 	public FMOD.Studio.EventInstance instance;
@@ -17,8 +30,10 @@ public class SoundSystem : MonoBehaviour
 				instance.release();
 				break;
 
-			case "etc...":
-
+			case "PenScratching":
+				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[2]);
+				instance.start();
+				instance.release();
 				break;
 		}
 	}
