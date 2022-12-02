@@ -4,19 +4,21 @@ using UnityEngine.UI;
 using TMPro;
 using MoreMountains.Feedbacks;
 using System.IO;
+using System.Collections;
 
 public class TextInputManager : MonoBehaviour
 {
+	[Header("Scripts")]
 	Inventory I;
-	//public MouseEraser ME;
+	SoundEvent SE;
+
+	[Header("Text Related")]
 	public TMP_InputField inputField;
 	public string theText;
 	public GameObject select;
 	public TextMeshProUGUI textMesh;
 	public bool isWriting;
-	public AudioSource aS;
 	public int randomus;
-	public List <AudioClip> aC;
 	public int writeCount;
 	public int sheetCount;
 	public TextMeshProUGUI countText;
@@ -24,35 +26,34 @@ public class TextInputManager : MonoBehaviour
 	public bool isFinished;
 	public string lastWord;
 	public bool isFirst;
-	//public GameObject eraseButton;
 	bool isZero;
 	public List<Texture2D> cursorTexture;
 	public BoxCollider2D boxCol;
+	Vector2 hotSpot;	
+	public bool menuOpen;
 	
+	[Header("Effects")]
 	public MMFeedbacks checkFeed;
 	public MMFeedbacks countFeed;
-	public MMFeedbacks sheetFeed;
-
-	Vector2 hotSpot;
+	public MMFeedbacks sheetFeed;	
 	
-	public bool menuOpen;
+	[Header("Lists, Words etc")]
 	int bookWords;
 	public List<TextMeshProUGUI> bookTexts;
-	public List<string> foundWords;
-	private KeyCode Space = KeyCode.Joystick1Button0;
-	
+	public List<string> foundWords;	
 	public GameObject book;
-	public TextMeshProUGUI countTextWord;
-	
-	public Button endButton;
-	
+	public TextMeshProUGUI countTextWord;	
+	public Button endButton;	
 	public List<TextMeshProUGUI> actionCommand;
 	int commandFound;
 	public List<string> foundCommands;
 	
+	private KeyCode Space = KeyCode.Joystick1Button0;
+	
 	void Start()
 	{
 		I = this.gameObject.GetComponent<Inventory>();
+		SE = GameObject.Find("SoundSystem").GetComponent<SoundEvent>();
 		int xspot = cursorTexture[0].width/2;
 		int yspot = cursorTexture[0].height/2;
 		Vector2 hotSpot = new Vector2(xspot,yspot);
@@ -74,16 +75,16 @@ public class TextInputManager : MonoBehaviour
 			if(!menuOpen && !isWriting && !I.bagOpen)
 			{
 				OpenBook();
-				aS.clip = aC[8];
-				aS.Play();
+				//aS.clip = aC[8];
+				//aS.Play();
 				menuOpen = true;
 			}
 			else if(menuOpen && !I.bagOpen)
 			{
 				CloseBook();
 				menuOpen = false;
-				aS.clip = aC[9];
-				aS.Play();
+				//aS.clip = aC[9];
+				//aS.Play();
 			}
 		}	
 	}
@@ -92,14 +93,13 @@ public class TextInputManager : MonoBehaviour
 	{
 		if(!isWriting && !isFinished)
 		{
-		aS.clip = aC[7];
-			aS.Play();
+			//aS.clip = aC[7];
+			//aS.Play();
 		}
 		
 		if(!isFinished)
 		{
 			Cursor.SetCursor(cursorTexture[2], hotSpot, CursorMode.Auto);
-			//ME.isGommed = false;
 		}
 	}
 	
@@ -117,8 +117,8 @@ public class TextInputManager : MonoBehaviour
 	
 	public void DisableHighlight()
 	{
-		aS.clip = aC[6];
-		aS.Play();
+		//aS.clip = aC[6];
+		//aS.Play();
 		isWriting = true;
 		select.SetActive(false);
 	}
@@ -131,10 +131,6 @@ public class TextInputManager : MonoBehaviour
 	void OnMouseExit()
 	{
 		select.SetActive(false);
-		//if(!ME.isGommed)
-		//{
-		//	Cursor.SetCursor(cursorTexture[0], hotSpot, CursorMode.Auto);
-		//}
 	}
     
 	public void CheckTextInput()
@@ -143,7 +139,6 @@ public class TextInputManager : MonoBehaviour
 		inputField.interactable = false;
 		isWriting = false;
 		isFinished = true;
-		//eraseButton.SetActive(true);
 		
 		if(theText == "aeiou" && !foundWords.Contains("aeiou"))
 		{
@@ -189,21 +184,9 @@ public class TextInputManager : MonoBehaviour
 			isFinished = false;
 			//eraseButton.SetActive(false);
 		}
-		else
-		{
-			endButton.Select();
-			sheetCount--;
-			sheetText.text = "x" + sheetCount.ToString();
-			sheetFeed.PlayFeedbacks();
-			inputField.text = null;
-			theText = null;
-			inputField.interactable = true;
-			isWriting = false;
-			isFinished = false;
-			textMesh.color = Color.black;
-			aS.clip = aC[10];
-			aS.Play();
-		}		
+		
+		StartCoroutine(WaitCheck());
+
 	}
 	
 	public void ScribbleSound()
@@ -231,10 +214,6 @@ public class TextInputManager : MonoBehaviour
 			writeCount --;
 			countFeed.PlayFeedbacks();
 		}
-			//if(ME.countLock)
-			//{
-			//	ME.countLock = false;
-			//}
 			
 		countText.text = writeCount.ToString();		
 	}
@@ -257,32 +236,38 @@ public class TextInputManager : MonoBehaviour
 	
 	void playSound()
 	{
+		
+		if(!isFirst && writeCount > 0)
+		{
+			SE.RandomPenScratch();
+		}
+		
 		randomus = Random.Range(1,6);
 		
 		if(randomus == 1 && !isFirst && writeCount > 0)
 		{
-			aS.clip = aC[0];
-			aS.Play();
+			//aS.clip = aC[0];
+			//aS.Play();
 		}
 		else if(randomus == 2 && !isFirst && writeCount > 0)
 		{
-			aS.clip = aC[1];
-			aS.Play();
+			//aS.clip = aC[1];
+			//aS.Play();
 		}
 		else if(randomus == 3 && !isFirst && writeCount > 0)
 		{
-			aS.clip = aC[2];
-			aS.Play();
+			//aS.clip = aC[2];
+			//aS.Play();
 		}
 		else if(randomus == 4 && !isFirst && writeCount > 0)
 		{
-			aS.clip = aC[3];
-			aS.Play();
+			//aS.clip = aC[3];
+			//aS.Play();
 		}
 		else if(randomus == 5 && !isFirst && writeCount > 0)
 		{
-			aS.clip = aC[4];
-			aS.Play();
+			//aS.clip = aC[4];
+			//aS.Play();
 		}
 	}
 	
@@ -303,23 +288,23 @@ public class TextInputManager : MonoBehaviour
 		if(!menuOpen && !isWriting && !I.bagOpen)
 			{
 				OpenBook();
-				aS.clip = aC[8];
-				aS.Play();
+			//aS.clip = aC[8];
+			//aS.Play();
 				menuOpen = true;
 			}
 		else if(menuOpen && !I.bagOpen)
 			{
 				CloseBook();
 				menuOpen = false;
-			aS.clip = aC[9];
-				aS.Play();
+			//aS.clip = aC[9];
+			//aS.Play();
 			}
 	}
 
 	void AddWord()
 	{
-		aS.clip = aC[5];
-		aS.Play();
+		//aS.clip = aC[5];
+		//aS.Play();
 		checkFeed.PlayFeedbacks();
 		bookTexts[bookWords].text = theText;
 		bookTexts[bookWords].color = textMesh.color;
@@ -332,14 +317,29 @@ public class TextInputManager : MonoBehaviour
 	void AddCommand()
 	{
 		textMesh.color = Color.yellow;
-		aS.clip = aC[5];
-		aS.Play();
+		//aS.clip = aC[5];
+		//aS.Play();
 		checkFeed.PlayFeedbacks();
 		actionCommand[commandFound].text = theText;
 		actionCommand[commandFound].color = textMesh.color;
 		commandFound++;
 		foundCommands.Add(theText);
 		Save();
+	}
+	
+	IEnumerator WaitCheck()
+	{
+		yield return new WaitForSeconds(2f);
+		endButton.Select();
+		sheetCount--;
+		sheetText.text = "x" + sheetCount.ToString();
+		sheetFeed.PlayFeedbacks();
+		inputField.text = null;
+		theText = null;
+		inputField.interactable = true;
+		isWriting = false;
+		isFinished = false;
+		textMesh.color = Color.black;
 	}
 	
 	void Save()
@@ -372,11 +372,6 @@ public class TextInputManager : MonoBehaviour
 		sheetText.text = "x" + sheetCount.ToString();
 		countText.text = writeCount.ToString();
 		countTextWord.text = bookWords.ToString();
-		Debug.Log(sheetText.text);
-		Debug.Log(countText.text);
-		Debug.Log(countTextWord.text);
-			
-		//ME.countText.text = ME.eraseCount.ToString();
 		
 		for (int i = 0; i < bookWords; i++)
 		{

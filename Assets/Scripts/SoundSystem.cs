@@ -68,8 +68,4 @@ public class SoundSystem : MonoBehaviour
 				break;
 		}
 	}
-
-
-
-	// r�sultat final dans les autres scripts : SS.PlaySE(surmulot);
 }

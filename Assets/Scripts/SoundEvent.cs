@@ -47,8 +47,10 @@ public class SoundEvent : MonoBehaviour
     }
   
 
-    void RandomPenScratch()
+	public void RandomPenScratch()
     {
-        rng = Random.Range(0,4);
+	    rng = Random.Range(0,4);
+	    SS.instance.setParameterByName("RandomTrigger", rng);
+	    SS.PlaySE("PenScratching");
     }
 }

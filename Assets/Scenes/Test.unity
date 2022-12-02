@@ -18935,6 +18935,18 @@ MonoBehaviour:
       Data3: -2020677477
       Data4: 952342473
     Path: event:/StepEvent
+  - Guid:
+      Data1: -2138757870
+      Data2: 1333073057
+      Data3: 1206938037
+      Data4: -909475510
+    Path: event:/PenScratching
+  - Guid:
+      Data1: 453711648
+      Data2: 1211206608
+      Data3: 1170854844
+      Data4: -1457425892
+    Path: event:/TurningPage
 --- !u!114 &1648165859
 MonoBehaviour:
   m_ObjectHideFlags: 0
