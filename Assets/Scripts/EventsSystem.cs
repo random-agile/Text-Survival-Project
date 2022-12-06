@@ -57,11 +57,13 @@ public class EventsSystem : MonoBehaviour
 	public void Search() //If eye button is pressed, will trigger the event according to his id
 	{
 		PC.isInteraction = true;
+		SS.PlaySE("TurningPage");
+		SS.PlaySE("TurningPage");
+		hud.SetActive(false);
+		
 		switch (eventId)
 		{
-		case "0":
-				hud.SetActive(false);	
-				SS.PlaySE("TurningPage");
+		case "0":				
 				text = "There's nothing interesting here.";
 				WD.nothingExt.Add(text);
 				text = null;
@@ -70,7 +72,6 @@ public class EventsSystem : MonoBehaviour
 				break;
 			
 		case " 1":
-				hud.SetActive(false);
 				WD.isColor = true;
 				text = "There is a piece of paper at my feet, but it is blank...";
 				AbstractAdd();

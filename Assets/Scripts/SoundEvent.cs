@@ -7,7 +7,7 @@ public class SoundEvent : MonoBehaviour
     public SoundSystem SS;
     public PlayerStats PS;
     public PlayerController PC;
-	//int rng = 0;
+	int rng = 0;
     bool asPlayStepSound;
 
     void Awake()
@@ -44,15 +44,25 @@ public class SoundEvent : MonoBehaviour
 	    	asPlayStepSound = false;
 	    	SS.instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 	    }
+	    
+	    if(SS.asWait)
+	    {
+	    	SS.PlaySE("PenScratching");
+	    }
+	    
+	    //else if (!SS.asWait)
+	    //{
+	    //SS.instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+	    //}
     }
   
 
 	public void RandomPenScratch()
     {
-	    //rng = Random.Range(0,4);
-	    //SS.instance.setParameterByName("RandomTrigger", rng);
-	    SS.PlaySE("PenScratching");
-	    Debug.Log("penscratch");
+	    rng = Random.Range(0,4);
+	    SS.instance.setParameterByName("RandomTrigger", rng);
+	    SS.asWait = true;
+	    //SS.PlaySE("PenScratching");
     }
     
 }

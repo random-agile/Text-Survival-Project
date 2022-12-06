@@ -20,6 +20,8 @@ public class SoundSystem : MonoBehaviour
 	public FMOD.Studio.EventInstance instance;
 	public List<FMODUnity.EventReference> fmodEvent;
 	
+	public bool asWait;
+	
 	public void PlaySE(string name)
 	{
 		switch (name)
@@ -33,13 +35,13 @@ public class SoundSystem : MonoBehaviour
 			case "PenScratching":
 				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[2]);
 				instance.start();
-				instance.release();
+				StartCoroutine(PenWait());
 				break;
+				
 			case "TurningPage":
 				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[3]);
 				instance.start();
 				instance.release();
-				Debug.Log("test");
 				break;
 		}
 	}
@@ -73,4 +75,11 @@ public class SoundSystem : MonoBehaviour
 				break;
 		}
 	}
+	
+	IEnumerator PenWait()
+	{
+		yield return new WaitForSeconds(0.25f);
+		asWait = false;
+	}
+
 }

@@ -240,6 +240,7 @@ public class TextInputManager : MonoBehaviour
 		if(!isFirst && writeCount > 0)
 		{
 			SE.RandomPenScratch();
+			SE.RandomPenScratch();
 		}
 		
 		randomus = Random.Range(1,6);

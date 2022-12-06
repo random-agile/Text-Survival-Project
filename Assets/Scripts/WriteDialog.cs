@@ -28,6 +28,7 @@ public class WriteDialog : MonoBehaviour
 	
 	EventsSystem ES;
 	PlayerController PC;
+	SoundSystem SS;
 	
 	public float displaySpeed;
 	
@@ -37,6 +38,7 @@ public class WriteDialog : MonoBehaviour
 		originalText = uiText.text;
 		ES = GameObject.Find("Player").GetComponent<EventsSystem>();
 		PC = GameObject.Find("Player").GetComponent<PlayerController>();
+		SS = GameObject.Find("SoundSystem").GetComponent<SoundSystem>();
     }
     
 	void Update()
@@ -52,6 +54,8 @@ public class WriteDialog : MonoBehaviour
 		{
 			if(loopControl > eventExt.Count -1)
 			{
+				SS.PlaySE("TurningPage");
+				SS.PlaySE("TurningPage");
 				AbstractEnd();				
 				isTextEvent = false;
 				eventExt.Clear();
@@ -61,6 +65,8 @@ public class WriteDialog : MonoBehaviour
 			
 			if(loopControl == eventExt.Count -1 && isColor)
 			{
+				SS.PlaySE("TurningPage");
+				SS.PlaySE("TurningPage");
 				AbstractNext();
 				originalText = eventExt[loopControl];
 				AbstractNextFollow();
@@ -71,6 +77,8 @@ public class WriteDialog : MonoBehaviour
 			
 			if(loopControl <= eventExt.Count -1)
 			{
+				SS.PlaySE("TurningPage");
+				SS.PlaySE("TurningPage");
 				AbstractNext();
 				originalText = eventExt[loopControl];
 				AbstractNextFollow();
