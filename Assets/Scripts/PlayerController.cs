@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 	
 	public bool asMoved;
 	public bool encounterSecurity;
+	public bool isInteraction;
 	
 	public MMFeedbacks FlashFeedback;
 	EncounterManager EM;
@@ -96,7 +97,7 @@ public class PlayerController : MonoBehaviour
 		
 		MovePlayer();	
 		
-		if(transform.position == targetGridPos)
+		if(transform.position == targetGridPos && !isInteraction)
 		{
 			asMoved = false;
 			hud.SetActive(true);

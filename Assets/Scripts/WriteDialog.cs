@@ -25,7 +25,9 @@ public class WriteDialog : MonoBehaviour
 	
 	public List <GameObject> menu;
 	public GameObject actualEvent;	
+	
 	EventsSystem ES;
+	PlayerController PC;
 	
 	public float displaySpeed;
 	
@@ -34,6 +36,7 @@ public class WriteDialog : MonoBehaviour
 		uiText.text = null;
 		originalText = uiText.text;
 		ES = GameObject.Find("Player").GetComponent<EventsSystem>();
+		PC = GameObject.Find("Player").GetComponent<PlayerController>();
     }
     
 	void Update()
@@ -127,12 +130,14 @@ public class WriteDialog : MonoBehaviour
 	
 	void AbstractEnd()
 	{
+		uiText.text = null;
 		isColor = false;
 		endBox.SetActive(false);
 		itemBox.SetActive(false);
 		updateSecurity = false;
 		loopControl = 1;
 		ES.isDoor = false;
+		PC.isInteraction = false;
 		//audioSrc.clip = turningPage;
 		foreach (var obj in menu)
 		{

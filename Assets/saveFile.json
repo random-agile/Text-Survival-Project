@@ -1,9 +1,10 @@
 {
-    "nbOfSheet": 5,
-    "nbOfWrite": 30,
-    "nbOfWords": 0,
+    "nbOfSheet": 4,
+    "nbOfWrite": 14,
+    "nbOfWords": 1,
     "nbOfCommands": 0,
     "allWordsFound": [
+        "lighter"
     ],
     "allCommandsFound": []
 }

@@ -8,7 +8,7 @@ using UnityEngine;
  *		0	MusicStress
  *		1	StepEvent
  *		2	PenScratching
- *		3
+ *		3	TurningPage
  *		4
  *
  * 
@@ -35,6 +35,12 @@ public class SoundSystem : MonoBehaviour
 				instance.start();
 				instance.release();
 				break;
+			case "TurningPage":
+				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[3]);
+				instance.start();
+				instance.release();
+				Debug.Log("test");
+				break;
 		}
 	}
 	
@@ -60,7 +66,6 @@ public class SoundSystem : MonoBehaviour
 			case "MusicStress":
 				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[0]);
 				instance.start();
-
 				break;
 
 			case "etc...":

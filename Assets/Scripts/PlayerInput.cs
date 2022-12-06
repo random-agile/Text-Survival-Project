@@ -68,7 +68,8 @@ public class PlayerInput : MonoBehaviour
 		//aS.Play();
 		isMovementLocked = true;
 		isItemMenu = true;
-		HUD.SetActive(false);
+		controller.isInteraction = true;
+		HUD.SetActive(false);		
 		ItemHUD.SetActive(true);
 		EventSystem.current.SetSelectedGameObject(ItemSelect);
 	}
@@ -79,6 +80,7 @@ public class PlayerInput : MonoBehaviour
 		//aS.Play();
 		isMovementLocked = false;
 		isItemMenu = false;
+		controller.isInteraction = false;
 		HUD.SetActive(true);
 		ItemHUD.SetActive(false);
 	}

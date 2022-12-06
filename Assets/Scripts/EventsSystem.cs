@@ -7,10 +7,13 @@ public class EventsSystem : MonoBehaviour
 {
 	WriteDialog WD;
 	ItemsSystem IS;
+	SoundSystem SS;
+	PlayerController PC;
 
 	[Header("Event Variables")]
 	public string eventId;
 	public string eventName;
+	public GameObject hud;
 	
 	[Header("Text Variables")]
 	string text;	
@@ -30,6 +33,8 @@ public class EventsSystem : MonoBehaviour
 		dialogBox = GameObject.Find("DialogBox");
 		WD = GameObject.Find("DialogBox/Text").GetComponent<WriteDialog>();
 		IS = this.gameObject.GetComponent<ItemsSystem>();
+		PC = this.gameObject.GetComponent<PlayerController>();
+		SS = GameObject.Find("SoundSystem").GetComponent<SoundSystem>();
 		dialogBox.SetActive(false);
 	}
 	
@@ -51,9 +56,12 @@ public class EventsSystem : MonoBehaviour
 
 	public void Search() //If eye button is pressed, will trigger the event according to his id
 	{
+		PC.isInteraction = true;
 		switch (eventId)
 		{
 		case "0":
+				hud.SetActive(false);	
+				SS.PlaySE("TurningPage");
 				text = "There's nothing interesting here.";
 				WD.nothingExt.Add(text);
 				text = null;
@@ -62,6 +70,7 @@ public class EventsSystem : MonoBehaviour
 				break;
 			
 		case " 1":
+				hud.SetActive(false);
 				WD.isColor = true;
 				text = "There is a piece of paper at my feet, but it is blank...";
 				AbstractAdd();
@@ -78,6 +87,7 @@ public class EventsSystem : MonoBehaviour
 				break;
 				
 		case " 3":
+				hud.SetActive(false);
 				WD.isColor = true;
 				text = "A blue key, seems important.";
 				AbstractAdd();
@@ -86,6 +96,7 @@ public class EventsSystem : MonoBehaviour
 				break;
 
 		case " 4":	
+			hud.SetActive(false);
 			isDoor = true;
 			if(!isDoor)
 			{
@@ -129,7 +140,7 @@ public class EventsSystem : MonoBehaviour
 		WD.eventExt.Add(text);
 		text = null;
 		WD.isTextEvent = true;
-		dialogBox.SetActive(true);
+	    dialogBox.SetActive(true);
     }
 
 	void AbstractEndItem() // use this to finish event with a new item obtained
@@ -139,6 +150,6 @@ public class EventsSystem : MonoBehaviour
 		WD.isTextEvent = true;
 		dialogBox.SetActive(true);
 		IS.CheckPlace();
-	    IS.AddItem(eventName);
+		IS.AddItem(eventName);
 	}
 }
