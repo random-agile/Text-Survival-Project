@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MonsterPattern : MonoBehaviour
 {
@@ -8,12 +9,23 @@ public class MonsterPattern : MonoBehaviour
 	SoundSystem SS;
 	MinerSpriteManager MSM;
 	RaycastHit playerSearch;
-	bool detectionSecure;
+	public bool detectionSecure;
 	public bool moveSecure;
 	string move;
 	public List<string> moveInstructions;
 	Vector3 nextPos;
 	Vector3 beginPos;
+	Vector3 playerPos;
+	
+	public GameObject invert;
+	public GameObject deadScreen;
+	public GameObject gameOver;
+
+	public FMODUnity.EventReference fmodEvent;
+	
+	bool isWait;
+	bool isDead;
+
 	
 	void Awake()
 	{
@@ -54,8 +66,9 @@ public class MonsterPattern : MonoBehaviour
 			this.transform.position -= new Vector3(5f * Time.deltaTime * 2, 0f, 0f);
 		}
 		
-	    if(Physics.Raycast(transform.position, transform.forward, out playerSearch, 20) && playerSearch.transform.tag == "Player" && !detectionSecure)
-	    {
+		if(Physics.Raycast(transform.position, transform.forward *-1, out playerSearch, 55) && playerSearch.transform.tag == "Player" && !detectionSecure)
+		{
+			playerPos = playerSearch.transform.position;
 	    	PlayerDetected();
 	    	detectionSecure = true;
 	    }
@@ -65,18 +78,39 @@ public class MonsterPattern : MonoBehaviour
 	    	MoveMonster();
 	    	moveSecure = true;
 	    }
+	    
+		if(isWait && detectionSecure)
+		{
+			this.transform.position -= new Vector3(10f * Time.deltaTime * 4, 0f, 0f);
+		}
+		
+		if(isDead)
+		{
+			deadScreen.SetActive(true);
+			gameOver.SetActive(true);
+		}
+	    
+		Debug.DrawRay(transform.position, transform.forward*-1, Color.red, 50);
+	    
     }
     
 	void PlayerDetected()
 	{
-		
+		SS.StopBGS("MusicStress");
+		MSM.stopAnim();
+		invert.SetActive(true);
+		SS.PlaySE("Heartbeat");
+		SS.PlaySE("Heartbeat");
+		StartCoroutine(WaitDetection());
 	}
     
 	void MoveMonster()
 	{
+		FMODUnity.RuntimeManager.PlayOneShotAttached(fmodEvent, this.gameObject);
 		move = moveInstructions[0];			
 		moveInstructions.RemoveAt(0);
 	}
+	
 	
 	void MinerPatternLoad()
 	{
@@ -109,5 +143,19 @@ public class MonsterPattern : MonoBehaviour
 		{
 			moveInstructions.Add("Down");
 		}		
+	}
+	
+	IEnumerator WaitDetection()
+	{
+		yield return new WaitForSeconds(2f);
+		SS.PlaySE("MinerGameOver");
+		SS.PlaySE("MinerGameOver");
+		MSM.resumeAnim();
+		invert.SetActive(false);
+		isWait = true;
+		yield return new WaitForSeconds(1f);
+		isDead = true;
+		yield return new WaitForSeconds(10f);
+		SceneManager.LoadScene(0);
 	}
 }

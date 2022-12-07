@@ -28,9 +28,9 @@ public class SoundEvent : MonoBehaviour
     {
         if (PS.stress >= 75)
         {
-            SS.instance.setParameterByName("Rng", 1);
+	        SS.bgsInstance.setParameterByName("Rng", 1);
         }
-        else SS.instance.setParameterByName("Rng", 0);
+        else SS.bgsInstance.setParameterByName("Rng", 0);
 
 
 	    if (PC.asMoved && !asPlayStepSound)
@@ -66,8 +66,7 @@ public class SoundEvent : MonoBehaviour
     {
 	    rng = Random.Range(0,4);
 	    SS.instance.setParameterByName("RandomTrigger", rng);
-	    SS.asWait = true;
-	    //SS.PlaySE("PenScratching");
+	    SS.PlaySE("PenScratching");
     }
     
 }

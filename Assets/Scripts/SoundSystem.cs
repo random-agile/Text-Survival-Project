@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 /*
  *		FmodEvent list:
@@ -9,7 +10,9 @@ using UnityEngine;
  *		1	StepEvent
  *		2	PenScratching
  *		3	TurningPage
- *		4
+ *		4	MinerStep
+ *		5   Heartbeat
+ *		6   MinerGameOver
  *
  * 
  */
@@ -18,6 +21,7 @@ using UnityEngine;
 public class SoundSystem : MonoBehaviour
 {
 	public FMOD.Studio.EventInstance instance;
+	public FMOD.Studio.EventInstance bgsInstance;
 	public List<FMODUnity.EventReference> fmodEvent;
 	
 	public bool asWait;
@@ -33,9 +37,7 @@ public class SoundSystem : MonoBehaviour
 				break;
 
 			case "PenScratching":
-				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[2]);
-				instance.start();
-				StartCoroutine(PenWait());
+				FMODUnity.RuntimeManager.PlayOneShot(fmodEvent[2]);
 				break;
 				
 			case "TurningPage":
@@ -43,6 +45,20 @@ public class SoundSystem : MonoBehaviour
 				instance.start();
 				instance.release();
 				break;
+				
+			case "Heartbeat":
+				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[4]);
+				instance.start();
+				instance.release();
+				break;
+				
+			case "MinerGameOver":
+				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[5]);
+				instance.start();
+				instance.release();
+				break;
+				
+			
 		}
 	}
 	
@@ -66,8 +82,8 @@ public class SoundSystem : MonoBehaviour
 		switch (name)
 		{
 			case "MusicStress":
-				instance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[0]);
-				instance.start();
+				bgsInstance = FMODUnity.RuntimeManager.CreateInstance(fmodEvent[0]);
+				bgsInstance.start();
 				break;
 
 			case "etc...":
@@ -76,10 +92,14 @@ public class SoundSystem : MonoBehaviour
 		}
 	}
 	
-	IEnumerator PenWait()
+	public void StopBGS(string name)
 	{
-		yield return new WaitForSeconds(0.25f);
-		asWait = false;
+		switch (name)
+		{
+		case "MusicStress":
+			bgsInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+			break;
+		}
 	}
 
 }
