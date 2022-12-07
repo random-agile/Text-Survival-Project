@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{3ddae494-28c2-4016-96a1-1bba9dcac9c8}">
+		<property name="assetPath">
+			<value>MinerStepAlt.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.506575963718821</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{c21fc794-1247-4984-8500-ab317f5178f8}</destination>
+		</relationship>
+	</object>
+</objects>

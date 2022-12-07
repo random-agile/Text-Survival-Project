@@ -18,8 +18,8 @@ public class SoundEvent : MonoBehaviour
     }
     
     void Start()
-    {
-        SS.PlayBGS("MusicStress");    
+	{ 
+        SS.PlayBGS("MusicStress"); 
     }
 
    
@@ -38,8 +38,13 @@ public class SoundEvent : MonoBehaviour
 	    	SS.PlaySE("StepEvent");
 	    	asPlayStepSound = true;
 	    }
+	    else if (PC.asRotated && !asPlayStepSound)
+	    {
+	    	SS.PlaySE("StepEvent");
+	    	asPlayStepSound = true;
+	    }
         
-	    if(!PC.asMoved)
+	    if(!PC.asMoved && !PC.asRotated)
 	    {
 	    	asPlayStepSound = false;
 	    	SS.instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);

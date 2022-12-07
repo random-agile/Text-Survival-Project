@@ -6,7 +6,7 @@ public class EncounterManager : MonoBehaviour
 	public GameObject dialogBox;
 	PlayerController PC;
 	//ChangeSprite CS;
-	MinerManager MM;
+	MinerSpriteManager MSM;
 	public WriteDialog WD;
 	private bool lockUpdate;
 	public GameObject invert;
@@ -19,7 +19,7 @@ public class EncounterManager : MonoBehaviour
 	{
 	    PC = this.GetComponent<PlayerController>();
 		//CS = GameObject.Find("UomoTwins").GetComponent<ChangeSprite>();
-		MM = GameObject.Find("Miner").GetComponent<MinerManager>();
+		MSM = GameObject.Find("Miner").GetComponent<MinerSpriteManager>();
 		//dialogBox.SetActive(true);
 		//dialogBox.SetActive(false);
     }
@@ -35,7 +35,7 @@ public class EncounterManager : MonoBehaviour
 		{
 			//lockUpdate = true;
 			bgsSource.Stop();
-			MM.stopAnim();
+			MSM.stopAnim();
 			invert.SetActive(true);
 			yield return new WaitForSeconds(2f);			
 			BattlePreps();
@@ -46,7 +46,7 @@ public class EncounterManager : MonoBehaviour
 	{
 		bgsSource.clip = DEATHMARK;
 		bgsSource.Play();
-		MM.resumeAnim();
+		MSM.resumeAnim();
 		invert.SetActive(false);
 		StartCoroutine(BattleIntro());
 	}

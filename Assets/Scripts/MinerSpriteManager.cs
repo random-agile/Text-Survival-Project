@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinerManager : MonoBehaviour
+public class MinerSpriteManager : MonoBehaviour
 {
 	public SpriteRenderer originalSprite;
 	public List<Sprite> idleList;	

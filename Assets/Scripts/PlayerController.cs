@@ -5,6 +5,8 @@ using MoreMountains.Feedbacks;
 
 public class PlayerController : MonoBehaviour
 {
+	MonsterPattern MP;
+	
 	public bool smoothTransition = false;
 	public float transitionSpeed = 10f;
 	public float transitionRotationSpeed = 500f;
@@ -16,11 +18,12 @@ public class PlayerController : MonoBehaviour
 	Vector3 actualRotation;
 	
 	public bool asMoved;
+	public bool asRotated;
 	public bool encounterSecurity;
 	public bool isInteraction;
 	
 	public MMFeedbacks FlashFeedback;
-	EncounterManager EM;
+	//EncounterManager EM;
 	
 	RaycastHit hitMonsterFront;
 	RaycastHit hitMonsterBack;
@@ -37,7 +40,8 @@ public class PlayerController : MonoBehaviour
 		Application.targetFrameRate = 60;
 		QualitySettings.vSyncCount = 1;
 		targetGridPos = Vector3Int.RoundToInt(transform.position);
-		EM = this.GetComponent<EncounterManager>();		
+		MP = GameObject.Find("Miner").GetComponent<MonsterPattern>();
+		//EM = this.GetComponent<EncounterManager>();		
 	}
 	
 	private void Encounter() // play heartbeat before encounter
@@ -47,7 +51,7 @@ public class PlayerController : MonoBehaviour
 			//seSource.clip = heartBeat;
 			//seSource.Play();
 			encounterSecurity = true;
-			EM.Engage();
+			//EM.Engage();
 		}
 	}
 	
@@ -100,12 +104,14 @@ public class PlayerController : MonoBehaviour
 		if(transform.position == targetGridPos && !isInteraction)
 		{
 			asMoved = false;
+			asRotated = false;
+			MP.moveSecure = false;
 			hud.SetActive(true);
 		}
 		
 		if(transform.eulerAngles != targetRotation)
 		{
-			asMoved = true;
+			asRotated = true;
 			hud.SetActive(false);
 		}
 		
@@ -153,7 +159,7 @@ public class PlayerController : MonoBehaviour
 		if(AtRest) 
 		{
 			targetRotation -= Vector3.up * 90f;
-			asMoved = true;
+			asRotated = true;
 			hud.SetActive(false);
 		}
 	}
@@ -163,7 +169,7 @@ public class PlayerController : MonoBehaviour
 		if(AtRest)
 		{
 			targetRotation += Vector3.up * 90f; 
-			asMoved = true;
+			asRotated = true;
 			hud.SetActive(false);
 		}
 	}
